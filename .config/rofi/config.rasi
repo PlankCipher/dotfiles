@@ -1,0 +1,218 @@
+configuration {
+  disable-history: true;
+  fixed-num-lines: true;
+}
+
+* {
+  spacing: 0;
+  blink: false;
+
+  font: 'LigaSFMono Nerd Font 13';
+
+  base: #1d1b2c;
+  surface: #2a273f;
+  overlay: #393552;
+  muted: #6e6a86;
+  subtle: #908caa;
+  text: #e0def4;
+  love: #eb6f92;
+  gold: #f6c177;
+  rose: #ea9a97;
+  pine: #3e8fb0;
+  foam: #9ccfd8;
+  iris: #c4a7e7;
+  highlight-low: #2a283e;
+  highlight-med: #44415a;
+  highlight-high: #56526e;
+
+  background: @surface;
+  background-color: @background;
+  foreground: @text;
+
+  border-color: @background;
+  separatorcolor: @border-color;
+
+  normal-background: @background;
+  normal-foreground: @foreground;
+
+  alternate-normal-background: @normal-background;
+  alternate-normal-foreground: @normal-foreground;
+
+  selected-normal-background: @highlight-med;
+  selected-normal-foreground: @text;
+
+  active-background: @iris;
+  active-foreground: @background;
+
+  alternate-active-background: @active-background;
+  alternate-active-foreground: @active-foreground;
+
+  selected-active-background: @selected-normal-background;
+  selected-active-foreground: @selected-normal-foreground;
+
+  urgent-background: @love;
+  urgent-foreground: @background;
+
+  alternate-urgent-background: @urgent-background;
+  alternate-urgent-foreground: @urgent-foreground;
+
+  selected-urgent-background: @selected-normal-background;
+  selected-urgent-foreground: @selected-normal-foreground;
+
+  highlight: @love;
+}
+
+window {
+  background-color: @background;
+  border: 0;
+  border-radius: 12px;
+  padding: 0;
+}
+
+mainbox {
+  margin: 0;
+  border: 0;
+}
+
+inputbar {
+  padding: 22px 15px;
+  margin: 0 0 22px 0;
+  background-color: @overlay;
+  children: [prompt, entry, num-filtered-rows, textbox-nums-sep, num-rows, case-indicator];
+}
+
+prompt {
+  background-color: inherit;
+  margin: 0 15px 0 0;
+  text-transform: bold #ea9a97;
+}
+
+entry {
+  background-color: inherit;
+  placeholder: "";
+}
+
+num-filtered-rows {
+  margin: 0 0 0 15px;
+  expand: false;
+  text-color: @subtle;
+  background-color: inherit;
+}
+
+textbox-nums-sep {
+  expand: false;
+  str: " / ";
+  text-color: @normal-foreground;
+  background-color: inherit;
+}
+
+num-rows {
+  expand: false;
+  text-color: @subtle;
+  background-color: inherit;
+}
+
+case-indicator {
+  expand: false;
+  text-color: @foreground;
+  background-color: inherit;
+}
+
+message {
+  padding: 0 15px 22px 15px;
+  border: 0;
+}
+
+textbox {
+  highlight: @highlight;
+  text-color: @foreground;
+}
+
+listview {
+  spacing: 1;
+  padding: 0 15px 22px 15px;
+  margin: 0;
+  border: 0;
+}
+
+element {
+  padding: 3px 0px;
+  margin: 0 10px 0 0;
+  spacing: 0;
+  border: 0;
+}
+
+element normal.normal {
+  background-color: @normal-background;
+  text-color: @normal-foreground;
+}
+
+element normal.urgent {
+  background-color: @urgent-background;
+  text-color: @urgent-foreground;
+}
+
+element normal.active {
+  background-color: @active-background;
+  text-color: @active-foreground;
+}
+
+element selected.normal {
+  background-color: @selected-normal-background;
+  text-color: @selected-normal-foreground;
+}
+
+element selected.urgent {
+  background-color: @selected-urgent-background;
+  text-color: @selected-urgent-foreground;
+}
+
+element selected.active {
+  background-color: @selected-active-background;
+  text-color: @selected-active-foreground;
+}
+
+element alternate.normal {
+  background-color: @alternate-normal-background;
+  text-color: @alternate-normal-foreground;
+}
+
+element alternate.urgent {
+  background-color: @alternate-urgent-background;
+  text-color: @alternate-urgent-foreground;
+}
+
+element alternate.active {
+  background-color: @alternate-active-background;
+  text-color: @alternate-active-foreground;
+}
+
+element-text {
+  background-color: inherit;
+  text-color: inherit;
+}
+
+scrollbar {
+  padding: 0;
+  border: 0;
+  width: 5px;
+  handle-width: 5px;
+  handle-color: @rose;
+  background-color: @overlay;
+}
+
+button {
+  cursor: pointer;
+  spacing: 0;
+  text-color: @normal-foreground;
+}
+
+button selected {
+  background-color: @selected-normal-background;
+  text-color: @selected-normal-foreground;
+}
+
+mode-switcher {
+  border-color: @separatorcolor;
+  border: 2px 0px 0px;
+}

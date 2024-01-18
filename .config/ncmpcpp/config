@@ -1,0 +1,37 @@
+##### directories ######
+ncmpcpp_directory = ~/.config/ncmpcpp
+lyrics_directory = ~/.config/ncmpcpp/lyrics
+
+##### connection settings #####
+mpd_music_dir = ~/Downloads/Music
+
+##### music visualizer #####
+visualizer_output_name = my_fifo
+visualizer_look = +|
+
+##### delays #####
+playlist_disable_highlight_delay = 0
+
+##### song format #####
+song_list_format = {%a - }{%t}|{$8%f$9}$R{$3%l$9}
+now_playing_prefix = $b$0> $9
+now_playing_suffix = $/b$0 <$9
+browser_sort_mode = name
+
+##### columns settings #####
+song_columns_list_format = (50)[white]{t|f:Title} (7f)[magenta]{l}
+
+##### various settings #####
+discard_colors_if_item_is_selected = no
+autocenter_mode = yes
+centered_cursor = yes
+progressbar_look = =>-
+cyclic_scrolling = yes
+user_interface = alternative
+generate_win32_compatible_filenames = no
+clock_display_seconds = yes
+display_bitrate = yes
+regular_expressions = extended
+lines_scrolled = 2
+empty_tag_marker =
+external_editor = nvim

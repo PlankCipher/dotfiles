@@ -1,0 +1,29 @@
+[status]
+	showuntrackedfiles = all
+[delta]
+	dark = true
+	syntax-theme = rose-pine-moon
+	true-color = always
+	tabs = 2
+	file-modified-label = modified:
+	keep-plus-minus-markers = true
+	minus-style = "red"
+	zero-style = "white"
+	plus-style = "green"
+	line-numbers-minus-style = "red"
+	line-numbers-zero-style = "#56526e"
+	line-numbers-plus-style = "green"
+	minus-emph-style = "#ffffff bold red"
+	plus-emph-style = "#ffffff bold green"
+	right-arrow = ->
+	hunk-header-file-style = "purple"
+	hunk-header-style = "purple"
+	hunk-header-decoration-style = ""
+	hunk-label = @@@
+	side-by-side = true
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[merge]
+	conflictstyle = diff3

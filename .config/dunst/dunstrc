@@ -1,0 +1,89 @@
+[global]
+    monitor = 0
+    follow = mouse
+    width = 350
+    height = 350
+    origin = top-center
+    offset = 0x30
+    scale = 0
+    notification_limit = 0
+    progress_bar = true
+    progress_bar_height = 10
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+    progress_bar_corner_radius = 7
+    icon_corner_radius = 12
+    indicate_hidden = yes
+    transparency = 0
+    separator_height = 2
+    padding = 15
+    horizontal_padding = 8
+    text_icon_padding = 0
+    frame_width = 0
+    gap_size = 10
+    sort = yes
+    idle_threshold = 120
+    font = LigaSFMono Nerd Font 14
+    line_height = 0
+    markup = full
+    format = "<b>%a</b>: <i>%s</i>\n\n%b"
+    alignment = center
+    vertical_alignment = center
+    show_age_threshold = 60
+    ellipsize = end
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+    enable_recursive_icon_lookup = true
+    icon_theme = Adwaita
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 128
+    sticky_history = yes
+    history_length = 50
+    dmenu = /usr/bin/rofi -dmenu -p 'dunst'
+    browser = /usr/bin/xdg-open
+    always_run_script = true
+    title = Dunst
+    class = Dunst
+    corner_radius = 12
+    ignore_dbusclose = true
+    force_xwayland = false
+    force_xinerama = false
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+[experimental]
+    per_monitor_dpi = false
+
+[urgency_low]
+    background = "#1d1b2c"
+    foreground = "#e0def4"
+    timeout = 10
+
+[urgency_normal]
+    background = "#1d1b2c"
+    foreground = "#e0def4"
+    timeout = 10
+
+[urgency_critical]
+    background = "#1d1b2c"
+    foreground = "#e0def4"
+    frame_color = "#ff0000"
+    timeout = 0
+
+[transient_disable]
+   match_transient = yes
+   set_transient = no
+
+[transient_history_ignore]
+   match_transient = yes
+   history_ignore = no
+
+[forward_notifs_to_eww]
+  appname = "*"
+  skip_display = true
+  script = ~/.scripts/notifs.sh

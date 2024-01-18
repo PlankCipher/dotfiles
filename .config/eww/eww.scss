@@ -1,0 +1,301 @@
+@use 'sass:color';
+
+$base: #1d1b2c;
+$surface: #2a273f;
+$overlay: #393552;
+$muted: #6e6a86;
+$subtle: #908caa;
+$text: #e0def4;
+$love: #eb6f92;
+$gold: #f6c177;
+$rose: #ea9a97;
+$pine: #3e8fb0;
+$foam: #9ccfd8;
+$iris: #c4a7e7;
+$highlight-low: #2a283e;
+$highlight-med: #44415a;
+$highlight-high: #56526e;
+
+* {
+  all: unset;
+  font-family: 'Liga SFMono', 'Font Awesome 6 Free';
+  font-size: 14px;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  color: $text;
+}
+
+.bar {
+  background-color: $base;
+  border-radius: 12px;
+  padding: 7px 10px;
+}
+
+.box {
+  padding: 7px 9px;
+  border-radius: 7px;
+}
+
+.keyboard {
+  background-color: color.mix($iris, $base, 23);
+}
+
+.keyboard__icon {
+  color: $iris;
+}
+
+.screen-timeout {
+  background-color: color.mix($gold, $base, 23);
+}
+
+.screen-timeout__icon {
+  color: $gold;
+}
+
+.net-speed {
+  background-color: color.mix($pine, $base, 23);
+}
+
+.net-speed__icon {
+  color: $pine;
+}
+
+.net-usage {
+  background-color: color.mix($rose, $base, 23);
+}
+
+.net-usage__icon {
+  color: $rose;
+}
+
+.music {
+  background-color: color.mix($foam, $base, 23);
+}
+
+.music__icon {
+  color: $foam;
+}
+
+.pomodoro {
+  background-color: color.mix($love, $base, 23);
+}
+
+.pomodoro__icon {
+  color: $love;
+}
+
+.workspace {
+  border-radius: 50%;
+  transition: all 0.17s ease-in-out;
+  background-color: color.mix($muted, $base, 30);
+}
+
+.workspace label {
+  font-size: 13px;
+  transition: all 0.17s ease-in-out;
+  color: $muted;
+}
+
+.workspace--active,
+.workspace:hover {
+  background-color: color.mix($gold, $base, 23);
+}
+
+.workspace--active label,
+.workspace:hover label {
+  color: $gold;
+}
+
+.volume {
+  background-color: color.mix($iris, $base, 23);
+}
+
+.volume__icon {
+  color: $iris;
+}
+
+.disk {
+  background-color: color.mix($foam, $base, 23);
+}
+
+.disk__icon {
+  color: $foam;
+}
+
+.cpu {
+  background-color: color.mix($love, $base, 23);
+}
+
+.cpu__icon {
+  color: $love;
+}
+
+.memory {
+  background-color: color.mix($pine, $base, 23);
+}
+
+.memory__icon {
+  color: $pine;
+}
+
+.fans {
+  background-color: color.mix($rose, $base, 23);
+}
+
+.fans__icon {
+  color: $rose;
+}
+
+.temps {
+  background-color: color.mix($iris, $base, 23);
+}
+
+.temps__icon {
+  color: $iris;
+}
+
+.battery {
+  background-color: color.mix($gold, $base, 23);
+}
+
+.battery__icon {
+  color: $gold;
+}
+
+.clock {
+  background-color: color.mix($foam, $base, 23);
+}
+
+.clock__icon {
+  color: $foam;
+}
+
+.off {
+  background-color: color.mix($muted, $base, 30);
+}
+
+.off label {
+  color: $muted;
+}
+
+@mixin blink-animation($name, $background-color) {
+  $animation-name: blink-#{$name};
+
+  @keyframes #{$animation-name} {
+    0% {
+      background-color: $background-color;
+    }
+
+    60% {
+      background-color: $background-color;
+    }
+
+    70% {
+      background-color: $love;
+    }
+
+    80% {
+      background-color: $background-color;
+    }
+
+    90% {
+      background-color: $love;
+    }
+
+    100% {
+      background-color: $background-color;
+    }
+  }
+
+  animation-name: $animation-name;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(10, end);
+}
+
+.battery.blink {
+  @include blink-animation('battery', color.mix($gold, $base, 23));
+}
+
+.pomodoro.blink {
+  @include blink-animation('pomodoro', color.mix($love, $base, 23));
+}
+
+.control_center * {
+  font-size: 16px;
+}
+
+.control_center__inner {
+  background-color: $surface;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.control_center__music,
+.control_center__notif {
+  background-color: $overlay;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.control_center__music label {
+  font-size: 17px;
+}
+
+.control_center__music__art {
+  border-radius: 7px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.control_center__music__art--stopped {
+  border-radius: 7px;
+  background-color: $highlight-high;
+}
+
+.control_center__music__art--stopped label {
+  font-size: 30px;
+}
+
+.control_center__music__title,
+.control_center__notif__title {
+  font-style: italic;
+}
+
+.control_center__music__controls label {
+  color: $iris;
+}
+
+.control_center__separator {
+  background-color: $highlight-med;
+}
+
+.control_center__notif--empty {
+  color: $subtle;
+}
+
+.control_center__notif__icon {
+  border-radius: 7px;
+  font-size: 22px;
+}
+
+.control_center__notif__icon--LOW {
+  background-color: color.mix($foam, $base, 33);
+  color: $foam;
+}
+
+.control_center__notif__icon--NORMAL {
+  background-color: color.mix($iris, $base, 33);
+  color: $iris;
+}
+
+.control_center__notif__icon--CRITICAL {
+  background-color: color.mix($love, $base, 33);
+  color: $love;
+}
+
+.control_center__notif__body {
+  font-weight: normal;
+}

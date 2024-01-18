@@ -1,0 +1,292 @@
+(defvar show-date false)
+(defvar keyboard "en")
+(defvar screen-timeout "1m")
+(defvar notifications "[]")
+(defpoll battery
+         :interval "120s"
+         :initial "{}"
+         "~/.scripts/battery.sh")
+(defpoll net-usage
+         :interval "10s"
+         "~/.scripts/net_usage.sh")
+(defpoll net-speed
+         :interval "1s"
+         "~/.scripts/net_speed.sh")
+(defpoll fans
+         :interval "3s"
+         "~/.scripts/fans.sh")
+(defpoll pomodoro
+         :interval "60s"
+         :initial "{}"
+         "~/.scripts/pomodoro.sh")
+(deflisten workspaces
+           :initial '[]'
+           "~/.scripts/hyprland_workspaces.sh")
+(deflisten music
+           :initial '{}'
+           "~/.scripts/music.sh")
+(deflisten volume
+           :initial '{}'
+           "~/.scripts/volume.sh volume")
+(deflisten mic
+           :initial ''
+           "~/.scripts/volume.sh mic")
+
+(defwindow bar
+           :monitor 0
+           :geometry (geometry :x "0px"
+                               :y "15px"
+                               :width "1890px"
+                               :height "35px"
+                               :anchor "top center")
+           :stacking "bottom"
+           :exclusive true
+           :focusable false
+           :namespace "eww_bar"
+
+  (centerbox
+    (box :halign "start"
+         :spacing 10
+         :space-evenly false
+      (box :class "box keyboard"
+           :spacing 7
+           :space-evenly false
+        (label :class "keyboard__icon"
+               :text "")
+        (label :text "${keyboard}"))
+
+      (eventbox :cursor "pointer"
+                :onclick "~/.scripts/toggle_lockscreen_timeout.sh"
+        (box :class "box ${screen-timeout == "Off" ? "off" : "screen-timeout"}"
+             :spacing 7
+             :space-evenly false
+          (label :class "screen-timeout__icon"
+                 :text "${screen-timeout == "Off" ? "" : ""}")
+          (label :text "${screen-timeout}")))
+
+      (box :class "box ${net-speed == "N/A" ? "off" : "net-speed"}"
+           :spacing 7
+           :space-evenly false
+        (label :class "net-speed__icon"
+               :text "")
+        (label :text net-speed))
+
+      (box :class "box ${net-usage == "N/A" ? "off" : "net-usage"}"
+           :spacing 7
+           :space-evenly false
+        (label :class "net-usage__icon"
+               :text "")
+        (label :text net-usage))
+
+      (eventbox :cursor "pointer"
+                :onclick "mpc toggle > /dev/null"
+                :onrightclick "${EWW_CMD} open control_center"
+        (box :class "box ${music.class}"
+             :spacing 7
+             :space-evenly false
+          (label :class "music__icon"
+                 :text "")
+          (label :text {music.text}
+                 :limit-width 11
+                 :show-truncated true)))
+
+      (eventbox :cursor "pointer"
+                :onclick "~/.scripts/pomodoro.sh toggle-status"
+                :onrightclick "~/.scripts/pomodoro.sh toggle-type"
+        (box :class "box pomodoro ${pomodoro.class}"
+             :spacing 7
+             :space-evenly false
+          (label :class "pomodoro__icon"
+                 :text {pomodoro.icon})
+          (label :text {pomodoro.rem}))))
+
+    (box :halign "center"
+         :valign "center"
+         :spacing 7
+         :space-evenly false
+      (for workspace in workspaces
+        (eventbox :cursor "pointer"
+                  :onclick "hyprctl dispatch workspace ${workspace.id} > /dev/null"
+                  :class "workspace ${workspace.class}"
+                  :width 32
+                  :height 32
+                  :valign "center"
+          (label :text {workspace.icon}))))
+
+    (box :halign "end"
+         :spacing 10
+         :space-evenly false
+      (eventbox :cursor "pointer"
+                :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+                :onrightclick "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+                :onscroll "~/.scripts/volume.sh change-volume {}"
+        (box :class "box ${volume.class}"
+             :spacing 10
+             :space-evenly false
+          (box :spacing 7
+               :space-evenly false
+            (label :class "volume__icon"
+                   :text {volume.icon})
+            (label :text "${volume.text}${volume.text == 'muted' ? '' : '%'}"))
+
+          (box :spacing 7
+               :space-evenly false
+            (label :class "volume__icon"
+                   :text "${mic == 'Off' ? '' : ''}")
+            (label :text mic))))
+
+      (box :class "box disk"
+           :spacing 7
+           :space-evenly false
+        (label :class "disk__icon"
+               :text "")
+        (label :text "${round(EWW_DISK['/'].free / (1024 * 1024 * 1024), 1)}G"))
+
+      (box :class "box cpu"
+           :spacing 7
+           :space-evenly false
+        (label :class "cpu__icon"
+               :text "")
+        (label :text "${round(EWW_CPU.avg, 0)}%"))
+
+      (box :class "box memory"
+           :spacing 7
+           :space-evenly false
+        (label :class "memory__icon"
+               :text "")
+        (label :text "${round(EWW_RAM.used_mem_perc, 0)}%"))
+
+      (box :class "box fans"
+           :spacing 7
+           :space-evenly false
+        (label :class "fans__icon"
+               :text "")
+        (label :text fans))
+
+      (box :class "box temps"
+           :spacing 7
+           :space-evenly false
+        (label :class "temps__icon"
+               :text "")
+        (label :text "${round(EWW_TEMPS.K10TEMP_TCTL, 0)} ${round(EWW_TEMPS.DELL_SMM_GPU, 0)}"))
+
+      (box :class "box battery ${battery.class}"
+           :spacing 7
+           :space-evenly false
+        (label :class "battery__icon"
+               :text {battery.icon})
+        (label :text "${battery.capacity}%"))
+
+      (eventbox :cursor "pointer"
+                :onclick "${EWW_CMD} update show-date=${!show-date}"
+        (box :class "box clock"
+             :spacing 7
+             :space-evenly false
+          (label :class "clock__icon"
+                 :text "")
+          (label :text "${formattime(EWW_TIME, show-date ? "%a %d-%m-%Y" : "%H:%M")}"))))))
+
+(defwindow control_center
+           :monitor 0
+           :geometry (geometry :x "0px"
+                               :y "10px"
+                               :width "450px"
+                               :height "500px"
+                               :anchor "top center")
+           :stacking "overlay"
+           :exclusive false
+           :focusable false
+           :namespace "eww_control_center"
+
+  (eventbox :onhoverlost "${EWW_CMD} close control_center"
+    (box :class "control_center__inner"
+         :orientation "vertical"
+         :spacing {arraylength(notifications) == 0 ? 0 : 15}
+         :space-evenly false
+      (box :class "control_center__music"
+           :spacing 20
+           :space-evenly false
+        (box :class "control_center__music__art"
+             :width 128
+             :height 72
+             :style 'background-image: url("/home/plankcipher/Downloads/Covers/${music.cover}");'
+             :visible {music.text != "stopped"})
+
+        (box :class "control_center__music__art--stopped"
+             :width 128
+             :height 72
+             :visible {music.text == "stopped"}
+          (label :text ""))
+
+        (box :spacing 0
+             :space-evenly true
+             :orientation "vertical"
+             :hexpand true
+          (label :class "control_center__music__title"
+                 :text {music.text}
+                 :limit-width 19)
+
+          (box :class "control_center__music__controls"
+               :space-evenly false
+               :spacing 30
+               :halign "center"
+            (eventbox :cursor "pointer"
+                      :onclick "mpc prev > /dev/null"
+              (label :text ""))
+
+            (eventbox :cursor "pointer"
+                      :onclick "mpc toggle > /dev/null"
+              (label :text "${music.class == 'off' ? '' : ''}"))
+
+            (eventbox :cursor "pointer"
+                      :onclick "mpc next > /dev/null"
+              (label :text "")))))
+
+      (box :class "control_center__separator"
+           :spacing 0
+           :space-evenly false
+           :halign "center"
+           :width 150
+           :height 3
+           :visible {arraylength(notifications) != 0})
+
+      (scroll :vscroll true
+              :hscroll false
+              :vexpand true
+        (box :spacing 15
+             :space-evenly false
+             :orientation "vertical"
+          (label :class "control_center__notif--empty"
+                 :text "No Notifications"
+                 :vexpand true
+                 :hexpand true
+                 :visible {arraylength(notifications) == 0})
+
+          (for notification in notifications
+            (eventbox :cursor "pointer"
+                      :onclick '~/.scripts/delete_notification.sh ${notification.id}'
+              (box :class "control_center__notif"
+                   :spacing 20
+                   :space-evenly false
+                (label :class "control_center__notif__icon control_center__notif__icon--${notification.urgency}"
+                       :text ""
+                       :width 60
+                       :height 60
+                       :valign "center")
+
+                (box :spacing 15
+                     :space-evenly {notification.body == ""}
+                     :orientation "vertical"
+                     :hexpand true
+                  (label :class "control_center__notif__title"
+                         :text "${notification.appname}: ${notification.summary}"
+                         :wrap true
+                         :justify "left"
+                         :xalign 0)
+
+                  (label :class "control_center__notif__body"
+                         :text {notification.body}
+                         :wrap true
+                         :justify "left"
+                         :xalign 0
+                         :visible {notification.body != ""}))))))))))
