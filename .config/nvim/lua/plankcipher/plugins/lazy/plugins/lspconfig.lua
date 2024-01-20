@@ -95,8 +95,6 @@ return {
       capabilities = capabilities,
       init_options = {
         ['language_server.diagnostic_sleep_time'] = 100,
-        ['language_server_php_cs_fixer.enabled'] = true,
-        ['language_server_php_cs_fixer.bin'] = '~/.config/composer/vendor/bin/php-cs-fixer',
       },
     })
 

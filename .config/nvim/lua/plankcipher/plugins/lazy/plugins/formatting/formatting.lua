@@ -21,18 +21,25 @@ return {
 
     vim.g.neoformat_python_yapf = {
       exe = 'yapf',
-      args = {'--style $HOME/.config/nvim/lua/plankcipher/plugins/formatting/.style.yapf'},
+      args = {'--style $HOME/.config/nvim/lua/plankcipher/plugins/lazy/plugins/formatting/.style.yapf'},
       stdin = 1,
     }
     vim.g.neoformat_enabled_python = {'yapf'}
 
+    vim.g.neoformat_php_phpcsfixer = {
+      exe = 'php-cs-fixer',
+      args = {'fix', '-q', '--config $HOME/.config/nvim/lua/plankcipher/plugins/lazy/plugins/formatting/.php-cs-fixer.php'},
+      replace = 1,
+    }
+    vim.g.neoformat_enabled_php = {'phpcsfixer'}
+
     vim.api.nvim_create_autocmd('BufWritePre', {
-      pattern = {'*.html', '*.css', '*.js', '*.jsx', '*.ts', '*.tsx', '*.json', '*.md', '*.py'},
+      pattern = {'*.html', '*.css', '*.js', '*.jsx', '*.ts', '*.tsx', '*.json', '*.md', '*.py', '*.php'},
       command = 'Neoformat',
     })
 
     vim.api.nvim_create_autocmd('BufWritePre', {
-      pattern = {'*.c', '*.cpp', '*.h', '*.php'},
+      pattern = {'*.c', '*.cpp', '*.h'},
       callback = function() vim.lsp.buf.format({async = false}) end,
     })
   end,
