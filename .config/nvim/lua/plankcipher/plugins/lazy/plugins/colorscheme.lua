@@ -402,30 +402,5 @@ return {
         vim.highlight.on_yank({higroup = 'IncSearch', timeout = 100})
       end,
     })
-
-    local orig_visual_hl = { bg = '#56526e' }
-    local paste_hl = { bg = '#8ec07c', fg = '#1d1b2c' }
-
-    vim.keymap.set({'n', 'v'}, 'p', function()
-      vim.api.nvim_set_hl(0, 'Visual', paste_hl)
-
-      vim.api.nvim_cmd({cmd = 'normal', bang = true, args = {'pma`[v`]l'}}, {})
-
-      vim.defer_fn(function()
-        vim.api.nvim_input('<Esc>`a')
-        vim.api.nvim_set_hl(0, 'Visual', orig_visual_hl)
-      end, 100)
-    end, { noremap = true })
-
-    vim.keymap.set({'n', 'v'}, 'P', function()
-      vim.api.nvim_set_hl(0, 'Visual', paste_hl)
-
-      vim.api.nvim_cmd({cmd = 'normal', bang = true, args = {'Pma`[v`]l'}}, {})
-
-      vim.defer_fn(function()
-        vim.api.nvim_input('<Esc>`a')
-        vim.api.nvim_set_hl(0, 'Visual', orig_visual_hl)
-      end, 100)
-    end, { noremap = true })
   end,
 }
