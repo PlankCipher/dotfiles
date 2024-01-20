@@ -264,7 +264,7 @@
 
           (for notification in notifications
             (eventbox :cursor "pointer"
-                      :onclick '~/.scripts/delete_notification.sh ${notification.id}'
+                      :onclick '~/.scripts/delete_notification.sh ${notification.id} &'
               (box :class "control_center__notif"
                    :spacing 20
                    :space-evenly false
