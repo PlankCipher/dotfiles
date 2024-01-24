@@ -1,6 +1,6 @@
 return {
   'sbdchd/neoformat',
-  event = 'BufWritePre',
+  event = 'VeryLazy',
   config = function()
     vim.g.neoformat_try_formatprg = 0
     vim.g.neoformat_basic_format_align = 0
