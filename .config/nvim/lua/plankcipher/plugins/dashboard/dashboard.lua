@@ -26,19 +26,22 @@ function open_dashboard()
       'Just me, my music, and the road...',
     },
     {
-      'Even a broken clock gets tha chance to be right twice a day'
+      'Even a broken clock gets tha chance to be right twice a day',
     },
     {
-      'Shitty software everywhere'
+      'Shitty software everywhere',
     },
     {
-      "(( ) => {...})();"
+      "(( ) => {...})();",
     },
     {
-      'Do not go gentle into that good night'
+      'Do not go gentle into that good night',
     },
     {
-      'Saving people. Hunting things. The family business.'
+      'Saving people. Hunting things. The family business.',
+    },
+    {
+      "There ain't no me if there ain't no you",
     },
   }
 

@@ -103,10 +103,12 @@ config.window_close_confirmation = 'NeverPrompt'
 config.audible_bell = 'Disabled'
 config.detect_password_input = false
 config.alternate_buffer_wheel_scroll_speed = 3
-config.default_cursor_style = 'SteadyBar'
+config.default_cursor_style = 'BlinkingBar'
 config.cursor_thickness = 1
 config.hide_mouse_cursor_when_typing = false
-config.cursor_blink_rate = 0
+config.cursor_blink_rate = 600
+config.cursor_blink_ease_in = 'Constant'
+config.cursor_blink_ease_out = 'Constant'
 config.canonicalize_pasted_newlines = 'LineFeed'
 config.underline_position = -3
 
