@@ -75,15 +75,15 @@ mainbox {
 }
 
 inputbar {
-  padding: 22px 15px;
-  margin: 0 0 22px 0;
+  padding: 25px 17px;
+  margin: 0 0 25px 0;
   background-color: @overlay;
   children: [prompt, entry, num-filtered-rows, textbox-nums-sep, num-rows, case-indicator];
 }
 
 prompt {
   background-color: inherit;
-  margin: 0 15px 0 0;
+  margin: 0 17px 0 0;
   text-transform: bold #ea9a97;
 }
 
@@ -93,7 +93,7 @@ entry {
 }
 
 num-filtered-rows {
-  margin: 0 0 0 15px;
+  margin: 0 0 0 17px;
   expand: false;
   text-color: @subtle;
   background-color: inherit;
@@ -119,7 +119,7 @@ case-indicator {
 }
 
 message {
-  padding: 0 15px 22px 15px;
+  padding: 0 17px 25px 17px;
   border: 0;
 }
 
@@ -130,7 +130,7 @@ textbox {
 
 listview {
   spacing: 1;
-  padding: 0 15px 22px 15px;
+  padding: 0 17px 25px 17px;
   margin: 0;
   border: 0;
 }
