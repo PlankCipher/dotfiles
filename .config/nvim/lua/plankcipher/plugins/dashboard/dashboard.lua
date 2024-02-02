@@ -43,6 +43,9 @@ function open_dashboard()
     {
       "There ain't no me if there ain't no you",
     },
+    {
+      'What the faculty have you done lately?',
+    },
   }
 
   math.randomseed(('' .. os.time()):reverse())
