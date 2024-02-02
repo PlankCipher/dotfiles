@@ -18,6 +18,7 @@ return {
         transparency = false,
         terminal = false,
         migrations = false,
+        legacy_highlights = false,
       },
 
       styles = {
@@ -67,7 +68,7 @@ return {
 
         Search = {fg = base, bg = 'gold', inherit = false},
         IncSearch = {fg = base, bg = 'love', inherit = false},
-        CurSearch = {link = 'IncSearch', inherit = false},
+        CurSearch = {fg = base, bg = 'love', inherit = false},
 
         NonText = {fg = 'highlight_high', inherit = false},
         TrailingWhitespace = {fg = '#ffffff', bg = '#ff0000', bold = true, inherit = false},
