@@ -46,6 +46,9 @@ function open_dashboard()
     {
       'What the faculty have you done lately?',
     },
+    {
+      'Kiss me I like it',
+    },
   }
 
   math.randomseed(('' .. os.time()):reverse())

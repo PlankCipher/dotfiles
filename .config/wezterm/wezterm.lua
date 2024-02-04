@@ -89,10 +89,10 @@ wezterm.on(
 )
 
 config.window_padding = {
-  top = 0,
-  right = 0,
-  bottom = 0,
-  left = 0,
+  top = '1cell',
+  right = '2cell',
+  bottom = '1cell',
+  left = '2cell',
 }
 
 config.enable_scroll_bar = false
