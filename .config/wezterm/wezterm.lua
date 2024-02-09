@@ -114,41 +114,14 @@ config.underline_position = -3
 
 config.adjust_window_size_when_changing_font_size = false
 config.allow_square_glyphs_to_overflow_width = 'Always'
-config.bold_brightens_ansi_colors = 'No'
+config.bold_brightens_ansi_colors = 'BrightAndBold'
 config.warn_about_missing_glyphs = false
 
 config.line_height = 0.9
-config.cell_width = 0.9
 config.font_size = 14
 config.font = wezterm.font_with_fallback({
-  'LigaSFMono Nerd Font',
+  'LigaBerkeleyMono Nerd Font',
 })
-
-config.font_rules = {
-  {
-    intensity = 'Bold',
-    italic = false,
-    font = wezterm.font_with_fallback({
-      {
-        family = 'LigaSFMono Nerd Font',
-        weight = 'ExtraBold',
-        style = 'Normal',
-      }
-    }),
-  },
-
-  {
-    intensity = 'Bold',
-    italic = true,
-    font = wezterm.font_with_fallback({
-      {
-        family = 'LigaSFMono Nerd Font',
-        weight = 'ExtraBold',
-        style = 'Italic',
-      }
-    }),
-  },
-}
 
 config.keys = {
   {

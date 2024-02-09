@@ -5,7 +5,7 @@ set render-loading "true"
 set page-padding 5
 set statusbar-home-tilde "true"
 
-set font "LigaSFMono normal 12"
+set font "Liga Berkeley Mono normal 12"
 
 set default-bg "#1d1b2c"
 set default-fg "#e0def4"

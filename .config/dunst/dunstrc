@@ -24,7 +24,7 @@
     gap_size = 10
     sort = yes
     idle_threshold = 120
-    font = LigaSFMono Nerd Font 14
+    font = LigaBerkeleyMono Nerd Font 14
     line_height = 0
     markup = full
     format = "<b>%a</b>: <i>%s</i>\n\n%b"

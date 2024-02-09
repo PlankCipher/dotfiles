@@ -66,7 +66,7 @@ function virtualenv_info {
   [ $VIRTUAL_ENV ] && echo "%{$fg[yellow]%}(%{$fg[green]%}venv: $(basename $VIRTUAL_ENV)%{$fg[yellow]%})${PR_RST} "
 }
 
-PROMPT='%{$fg[yellow]%}┏━'
+PROMPT='%{$fg[yellow]%}╭─'
 PROMPT+='%{$fg[red]%}$(echo "$? " | sed "s/^0 $//")'
 PROMPT+='%{$fg[yellow]%}(%{$fg[blue]%}%n%{$fg[yellow]%}@%{$fg[blue]%}%m%{$fg[yellow]%}) '
 PROMPT+='[%{$fg[cyan]%}%~%{$fg[yellow]%}] '
@@ -74,4 +74,4 @@ PROMPT+='$(((echo $vcs_info_msg_0_ | grep "󰑊" > /dev/null) && echo $vcs_info_
 PROMPT+='$(virtualenv_info)'
 PROMPT+='$(last_command_duration)'
 PROMPT+=$'\n'
-PROMPT+='%{$fg[yellow]%}┗━$ ${PR_RST}'
+PROMPT+='%{$fg[yellow]%}╰─$ ${PR_RST}'

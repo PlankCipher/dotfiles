@@ -124,8 +124,8 @@ EOF
   yarn global add vscode-langservers-extracted typescript typescript-language-server emmet-ls prettier @fsouza/prettierd pyright
   sudo pacman -S yapf
 
-  sudo mkdir -p /usr/share/fonts/OTF
-  sudo mv $SCRIPT_DIR/font/*.otf /usr/share/fonts/OTF/
+  sudo mkdir -p /usr/share/fonts/{OTF,TTF}
+  sudo mv $SCRIPT_DIR/font/*.ttf /usr/share/fonts/TTF/
 
   yay -S neovim-git
 
