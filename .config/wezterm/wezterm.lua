@@ -114,7 +114,7 @@ config.underline_position = -3
 
 config.adjust_window_size_when_changing_font_size = false
 config.allow_square_glyphs_to_overflow_width = 'Always'
-config.bold_brightens_ansi_colors = 'BrightAndBold'
+config.bold_brightens_ansi_colors = 'No'
 config.warn_about_missing_glyphs = false
 
 config.line_height = 0.9
