@@ -1,7 +1,7 @@
 {
   "insertPragma": false,
   "requirePragma": false,
-  "bracketSpacing": false,
+  "bracketSpacing": true,
   "quoteProps": "as-needed",
   "arrowParens": "always",
   "experimentalTernaries": false,
