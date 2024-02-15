@@ -47,7 +47,10 @@ function open_dashboard()
       'What the faculty have you done lately?',
     },
     {
-      'Kiss me I like it',
+      'Kiss me, I love it.',
+    },
+    {
+      'for he is a friend to none, that is a friend to all',
     },
   }
 
