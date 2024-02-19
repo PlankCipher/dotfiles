@@ -309,8 +309,8 @@ EOF
 
   sudo pacman -S rustup gtk3 gtk-layer-shell pango gdk-pixbuf2 cairo glib2 gcc-libs glibc
 
-  rustup toolchain install nightly
-  rustup default nightly
+  rustup toolchain install stable nightly
+  rustup default stable
 
   git clone https://github.com/elkowar/eww.git $HOME/Downloads/eww
   cd $HOME/Downloads/eww

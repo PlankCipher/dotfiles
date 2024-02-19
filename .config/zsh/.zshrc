@@ -34,7 +34,7 @@ _full_upgrade () {
         ;;
 
       "rust")
-        rustup update nightly
+        rustup update stable nightly
         ;;
 
       "eww")
