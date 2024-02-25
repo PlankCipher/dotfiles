@@ -33,14 +33,34 @@ return {
     }
     vim.g.neoformat_enabled_php = {'phpcsfixer'}
 
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      pattern = {'*.html', '*.css', '*.js', '*.jsx', '*.ts', '*.tsx', '*.json', '*.md', '*.py', '*.php'},
-      command = 'Neoformat',
+    vim.api.nvim_create_augroup('formatting', {
+      clear = false
     })
 
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      pattern = {'*.c', '*.cpp', '*.h'},
-      callback = function() vim.lsp.buf.format({async = false}) end,
-    })
+    function enable_auto_formatting()
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = 'formatting',
+        pattern = {'*.html', '*.css', '*.js', '*.jsx', '*.ts', '*.tsx', '*.json', '*.md', '*.py', '*.php'},
+        command = 'Neoformat',
+      })
+
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = 'formatting',
+        pattern = {'*.c', '*.cpp', '*.h', '*.rs'},
+        callback = function() vim.lsp.buf.format({async = false}) end,
+      })
+    end
+
+    enable_auto_formatting()
+
+    vim.keymap.set('n', '<leader>tf', function()
+      if #(vim.api.nvim_get_autocmds({group = 'formatting'})) == 0 then
+        enable_auto_formatting()
+        print('formatting enabled')
+      else
+        vim.api.nvim_clear_autocmds({group = 'formatting'})
+        print('formatting disabled')
+      end
+    end)
   end,
 }
