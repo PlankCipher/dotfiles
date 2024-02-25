@@ -122,7 +122,13 @@ EOF
   sudo pacman -S aspell aspell-en
 
   yarn global add vscode-langservers-extracted typescript typescript-language-server emmet-ls prettier @fsouza/prettierd pyright
-  sudo pacman -S yapf
+  sudo pacman -S yapf rustup
+  rustup toolchain install stable nightly
+  rustup default stable
+  rustup component add rust-src
+  rustup +nightly component add rust-src
+  rustup component add rust-analyzer
+  rustup +nightly component add rust-analyzer
 
   sudo mkdir -p /usr/share/fonts/{OTF,TTF}
   sudo mv $SCRIPT_DIR/font/*.ttf /usr/share/fonts/TTF/
@@ -307,10 +313,7 @@ install_eww () {
 
 EOF
 
-  sudo pacman -S rustup gtk3 gtk-layer-shell pango gdk-pixbuf2 cairo glib2 gcc-libs glibc
-
-  rustup toolchain install stable nightly
-  rustup default stable
+  sudo pacman -S gtk3 gtk-layer-shell pango gdk-pixbuf2 cairo glib2 gcc-libs glibc
 
   git clone https://github.com/elkowar/eww.git $HOME/Downloads/eww
   cd $HOME/Downloads/eww

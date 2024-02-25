@@ -3,6 +3,20 @@ return {
   config = function()
     local lspconfig = require('lspconfig')
 
+    function merge_tables(a, b)
+      local result = {}
+
+      for key, value in pairs(a) do
+        result[key] = value
+      end
+
+      for key, value in pairs(b) do
+        result[key] = value
+      end
+
+      return result
+    end
+
     function code_action_listener()
       local params = vim.lsp.util.make_range_params()
 
@@ -68,35 +82,55 @@ return {
 
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-    local servers = {'html', 'cssls', 'emmet_ls', 'tsserver', 'clangd', 'pyright'}
-    for _, lsp in ipairs(servers) do
-      lspconfig[lsp].setup({
-        on_attach = on_attach,
-        on_init = on_init,
-        flags = lsp_flags,
-        capabilities = capabilities,
-      })
+    local base_config = {
+      on_attach = on_attach,
+      on_init = on_init,
+      flags = lsp_flags,
+      capabilities = capabilities,
+    }
+
+    local servers = {
+      html = base_config,
+      cssls = base_config,
+      emmet_ls = base_config,
+      tsserver = base_config,
+      clangd = base_config,
+      pyright = base_config,
+
+      eslint = merge_tables(base_config, {
+        settings = {
+          packageManager = 'yarn',
+        },
+      }),
+
+      phpactor = merge_tables(base_config, {
+        init_options = {
+          ['language_server.diagnostic_sleep_time'] = 100,
+        },
+      }),
+
+      rust_analyzer = merge_tables(base_config, {
+        settings = {
+          ['rust-analyzer'] = {
+            completion = {
+              fullFunctionSignatures = {
+                enable = true,
+              },
+            },
+            rustfmt = {
+              extraArgs = {
+                '+nightly',
+                '--config-path', os.getenv('HOME') .. '/.config/nvim/lua/plankcipher/plugins/lazy/plugins/formatting/rustfmt.toml',
+              },
+            },
+          },
+        },
+      }),
+    }
+
+    for server, config in pairs(servers) do
+      lspconfig[server].setup(config)
     end
-
-    lspconfig.eslint.setup({
-      on_attach = on_attach,
-      on_init = on_init,
-      flags = lsp_flags,
-      capabilities = capabilities,
-      settings = {
-        packageManager = 'yarn',
-      }
-    })
-
-    lspconfig.phpactor.setup({
-      on_attach = on_attach,
-      on_init = on_init,
-      flags = lsp_flags,
-      capabilities = capabilities,
-      init_options = {
-        ['language_server.diagnostic_sleep_time'] = 100,
-      },
-    })
 
     vim.diagnostic.config({
       virtual_text = {

@@ -108,11 +108,14 @@ return {
         documentation = {
           border = 'rounded',
           winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+          max_width = 100,
+          max_height = 30,
         },
       },
       experimental = {
         ghost_text = {hl_group = 'cmp_ghost_text'},
-      }
+      },
+      preselect = cmp.PreselectMode.None,
     }
   end,
 }
