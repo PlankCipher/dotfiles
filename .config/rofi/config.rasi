@@ -7,7 +7,7 @@ configuration {
   spacing: 0;
   blink: false;
 
-  font: 'LigaBerkeleyMono Nerd Font 14';
+  font: 'LigaBerkeleyMono Nerd Font 13';
 
   base: #1d1b2c;
   surface: #2a273f;
@@ -70,33 +70,49 @@ window {
 }
 
 mainbox {
-  margin: 0;
   border: 0;
+  margin: 0;
+  padding: 15px;
 }
 
 inputbar {
-  padding: 25px 17px;
-  margin: 0 0 25px 0;
+  margin: 0;
+  padding: 14px;
+  border-radius: 12px;
   background-color: @overlay;
-  children: [prompt, entry, num-filtered-rows, textbox-nums-sep, num-rows, case-indicator];
+  children: [prompt, textbox-prompt-sep, entry, num-filtered-rows, textbox-nums-sep, num-rows, case-indicator];
 }
 
 prompt {
-  background-color: inherit;
-  margin: 0 17px 0 0;
-  text-transform: bold #ea9a97;
+  padding: 7px 0 7px 12px;
+  border-radius: 7px 0 0 7px;
+  background-color: @rose;
+  text-transform: bold #1d1b2c;
+  vertical-align: 0.5;
+}
+
+textbox-prompt-sep {
+  expand: false;
+  str: ":";
+  padding: 7px 11px 7px 0;
+  background-color: @rose;
+  text-transform: bold #1d1b2c;
+  border-radius: 0 7px 7px 0;
+  vertical-align: 0.5;
 }
 
 entry {
   background-color: inherit;
   placeholder: "";
+  margin: 0 15px;
+  vertical-align: 0.5;
 }
 
 num-filtered-rows {
-  margin: 0 0 0 17px;
   expand: false;
   text-color: @subtle;
   background-color: inherit;
+  vertical-align: 0.5;
 }
 
 textbox-nums-sep {
@@ -104,22 +120,25 @@ textbox-nums-sep {
   str: " / ";
   text-color: @normal-foreground;
   background-color: inherit;
+  vertical-align: 0.5;
 }
 
 num-rows {
   expand: false;
   text-color: @subtle;
   background-color: inherit;
+  vertical-align: 0.5;
 }
 
 case-indicator {
   expand: false;
   text-color: @foreground;
   background-color: inherit;
+  vertical-align: 0.5;
 }
 
 message {
-  padding: 0 17px 25px 17px;
+  padding: 15px 0 0 0;
   border: 0;
 }
 
@@ -130,16 +149,16 @@ textbox {
 
 listview {
   spacing: 1;
-  padding: 0 17px 25px 17px;
+  padding: 15px 0 0 0;
   margin: 0;
   border: 0;
 }
 
 element {
-  padding: 3px 0px;
-  margin: 0 10px 0 0;
+  padding: 4px 7px;
   spacing: 0;
   border: 0;
+  border-radius: 6px;
 }
 
 element normal.normal {
@@ -194,7 +213,9 @@ element-text {
 
 scrollbar {
   padding: 0;
+  margin: 0 0 0 10px;
   border: 0;
+  border-radius: 15px;
   width: 5px;
   handle-width: 5px;
   handle-color: @rose;
@@ -214,5 +235,5 @@ button selected {
 
 mode-switcher {
   border-color: @separatorcolor;
-  border: 2px 0px 0px;
+  border: 2px 0 0 0;
 }
