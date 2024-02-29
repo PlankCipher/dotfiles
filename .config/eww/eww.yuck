@@ -35,8 +35,8 @@
 (defwindow bar
            :monitor 0
            :geometry (geometry :x "0px"
-                               :y "10px"
-                               :width "1900px"
+                               :y "15px"
+                               :width "1890px"
                                :height "35px"
                                :anchor "top center")
            :stacking "bottom"
