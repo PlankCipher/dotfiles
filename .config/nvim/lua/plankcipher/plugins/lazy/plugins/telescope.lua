@@ -106,7 +106,8 @@ return {
         borderchars = {'█', '▊', '█', '🮊', '🮊', '▊', '▊', '🮊'},
         sorting_strategy = 'ascending',
         prompt_prefix = '󰍉 ',
-        selection_caret = '󰘍 ',
+        selection_caret = ' ',
+        entry_prefix = ' ',
         dynamic_preview_title = true,
         results_title = false,
         vimgrep_arguments = {
