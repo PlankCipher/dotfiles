@@ -19,9 +19,9 @@ set statusbar-bg "#393552"
 set render-loading-bg "#1d1b2c"
 set render-loading-fg "#e0def4"
 
-set highlight-color "#f6c177"
+set highlight-color "rgba(246, 193, 119, 0.5)"
 set highlight-fg "#1d1b2c"
-set highlight-active-color "#eb6f92"
+set highlight-active-color "rgba(235, 111, 146, 0.5)"
 
 set inputbar-bg "#1d1b2c"
 set inputbar-fg "#e0def4"
