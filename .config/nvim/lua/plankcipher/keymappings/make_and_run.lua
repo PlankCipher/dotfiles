@@ -35,7 +35,7 @@ vim.keymap.set('n', '<leader>,.', function()
   vim.api.nvim_cmd({cmd = 'make'}, {})
 
   -- Only run if there were no errors making
-  if vim.v.shell_error == 0 then
+  if vim.v.shell_error == 0 and #vim.fn.getqflist() == 0 then
     run_in_terminal()
   end
 end)
