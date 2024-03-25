@@ -72,19 +72,18 @@ window {
 mainbox {
   border: 0;
   margin: 0;
-  padding: 15px;
 }
 
 inputbar {
-  margin: 0;
-  padding: 14px;
-  border-radius: 12px;
-  background-color: @overlay;
-  children: [prompt, textbox-prompt-sep, entry, num-filtered-rows, textbox-nums-sep, num-rows, case-indicator];
+  margin: 0 0 20px 0;
+  padding: 45px 95px;
+  border-radius: 12px 12px 0 0;
+  background-image: url("~/.config/wallpapers/10.png", width);
+  children: [prompt, textbox-prompt-sep, entry, textbox-case-sep-left, case-indicator, textbox-case-sep-right, num-filtered-rows, textbox-nums-sep, num-rows];
 }
 
 prompt {
-  padding: 7px 0 7px 12px;
+  padding: 12px 0 12px 15px;
   border-radius: 7px 0 0 7px;
   background-color: @rose;
   text-transform: bold #1d1b2c;
@@ -94,7 +93,7 @@ prompt {
 textbox-prompt-sep {
   expand: false;
   str: ":";
-  padding: 7px 11px 7px 0;
+  padding: 12px 13px 12px 0;
   background-color: @rose;
   text-transform: bold #1d1b2c;
   border-radius: 0 7px 7px 0;
@@ -102,43 +101,68 @@ textbox-prompt-sep {
 }
 
 entry {
-  background-color: inherit;
+  background-color: @background;
   placeholder: "";
-  margin: 0 15px;
+  margin: 0 0 0 15px;
   vertical-align: 0.5;
+  padding: 12px 15px;
+  border-radius: 7px 0 0 7px;
 }
 
-num-filtered-rows {
+textbox-case-sep-left {
   expand: false;
-  text-color: @subtle;
-  background-color: inherit;
-  vertical-align: 0.5;
-}
-
-textbox-nums-sep {
-  expand: false;
-  str: " / ";
-  text-color: @normal-foreground;
-  background-color: inherit;
-  vertical-align: 0.5;
-}
-
-num-rows {
-  expand: false;
-  text-color: @subtle;
-  background-color: inherit;
+  str: "[";
+  text-color: @foreground;
+  padding: 12px 0 12px 0;
+  border-radius: 0;
   vertical-align: 0.5;
 }
 
 case-indicator {
   expand: false;
   text-color: @foreground;
-  background-color: inherit;
+  background-color: @background;
   vertical-align: 0.5;
 }
 
+textbox-case-sep-right {
+  expand: false;
+  str: "]";
+  text-color: @foreground;
+  padding: 12px 14px 12px 0;
+  border-radius: 0 7px 7px 0;
+  vertical-align: 0.5;
+  margin: 0 15px 0 0;
+}
+
+num-filtered-rows {
+  expand: false;
+  text-color: @normal-foreground;
+  background-color: @background;
+  vertical-align: 0.5;
+  padding: 12px 0 12px 15px;
+  border-radius: 7px 0 0 7px;
+}
+
+textbox-nums-sep {
+  expand: false;
+  str: " / ";
+  text-color: @normal-foreground;
+  background-color: @background;
+  vertical-align: 0.5;
+}
+
+num-rows {
+  expand: false;
+  text-color: @normal-foreground;
+  background-color: @background;
+  vertical-align: 0.5;
+  padding: 12px 13px 12px 0;
+  border-radius: 0 7px 7px 0;
+}
+
 message {
-  padding: 15px 0 0 0;
+  padding: 0 20px 20px 20px;
   border: 0;
 }
 
@@ -149,7 +173,7 @@ textbox {
 
 listview {
   spacing: 1;
-  padding: 15px 0 0 0;
+  padding: 0 20px 20px 20px;
   margin: 0;
   border: 0;
 }
