@@ -69,14 +69,6 @@ $highlight-high: #56526e;
   color: $rose;
 }
 
-.music {
-  background-color: color.mix($foam, $base, 23);
-}
-
-.music__icon {
-  color: $foam;
-}
-
 .pomodoro {
   background-color: color.mix($love, $base, 23);
 }
@@ -232,44 +224,14 @@ $highlight-high: #56526e;
   padding: 15px;
 }
 
-.control_center__music,
 .control_center__notif {
   background-color: $overlay;
   padding: 12px;
   border-radius: 12px;
 }
 
-.control_center__music label {
-  font-size: 17px;
-}
-
-.control_center__music__art {
-  border-radius: 7px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.control_center__music__art--stopped {
-  border-radius: 7px;
-  background-color: $highlight-high;
-}
-
-.control_center__music__art--stopped label {
-  font-size: 30px;
-}
-
-.control_center__music__title,
 .control_center__notif__title {
   font-style: italic;
-}
-
-.control_center__music__controls label {
-  color: $iris;
-}
-
-.control_center__separator {
-  background-color: $highlight-med;
 }
 
 .control_center__notif--empty {

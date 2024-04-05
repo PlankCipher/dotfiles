@@ -216,14 +216,14 @@ install_mpd () {
 
 EOF
 
-  yay -S mpd mpc ncmpcpp
+  yay -S mpd mpc
 
   # Add mpd to required groups
   sudo gpasswd -a mpd $(whoami)
   chmod 710 $HOME/
   sudo gpasswd -a mpd audio
 
-  cp -r $SCRIPT_DIR/.config/mpd $SCRIPT_DIR/.config/ncmpcpp $HOME/.config/
+  cp -r $SCRIPT_DIR/.config/mpd $HOME/.config/
 }
 
 install_zsh_and_ohmyzsh () {

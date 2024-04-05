@@ -22,9 +22,6 @@
 (deflisten workspaces
            :initial '[]'
            "~/.scripts/hyprland_workspaces.sh")
-(deflisten music
-           :initial '{}'
-           "~/.scripts/music.sh")
 (deflisten volume
            :initial '{}'
            "~/.scripts/volume.sh volume")
@@ -77,18 +74,6 @@
         (label :class "net-usage__icon"
                :text "")
         (label :text net-usage))
-
-      (eventbox :cursor "pointer"
-                :onclick "mpc toggle > /dev/null"
-                :onrightclick "${EWW_CMD} open control_center"
-        (box :class "box ${music.class}"
-             :spacing 7
-             :space-evenly false
-          (label :class "music__icon"
-                 :text "")
-          (label :text {music.text}
-                 :limit-width 11
-                 :show-truncated true)))
 
       (eventbox :cursor "pointer"
                 :onclick "~/.scripts/pomodoro.sh toggle-status"
@@ -201,55 +186,7 @@
   (eventbox :onhoverlost "${EWW_CMD} close control_center"
     (box :class "control_center__inner"
          :orientation "vertical"
-         :spacing {arraylength(notifications) == 0 ? 0 : 15}
          :space-evenly false
-      (box :class "control_center__music"
-           :spacing 20
-           :space-evenly false
-        (box :class "control_center__music__art"
-             :width 128
-             :height 72
-             :style 'background-image: url("/home/plankcipher/Downloads/Covers/${music.cover}");'
-             :visible {music.text != "stopped"})
-
-        (box :class "control_center__music__art--stopped"
-             :width 128
-             :height 72
-             :visible {music.text == "stopped"}
-          (label :text ""))
-
-        (box :spacing 0
-             :space-evenly true
-             :orientation "vertical"
-             :hexpand true
-          (label :class "control_center__music__title"
-                 :text {music.text}
-                 :limit-width 19)
-
-          (box :class "control_center__music__controls"
-               :space-evenly false
-               :spacing 30
-               :halign "center"
-            (eventbox :cursor "pointer"
-                      :onclick "mpc prev > /dev/null"
-              (label :text ""))
-
-            (eventbox :cursor "pointer"
-                      :onclick "mpc toggle > /dev/null"
-              (label :text "${music.class == 'off' ? '' : ''}"))
-
-            (eventbox :cursor "pointer"
-                      :onclick "mpc next > /dev/null"
-              (label :text "")))))
-
-      (box :class "control_center__separator"
-           :spacing 0
-           :space-evenly false
-           :halign "center"
-           :width 150
-           :height 3
-           :visible {arraylength(notifications) != 0})
-
       (scroll :vscroll true
               :hscroll false
               :vexpand true
