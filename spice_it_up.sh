@@ -313,7 +313,7 @@ install_eww () {
 
 EOF
 
-  sudo pacman -S gtk3 gtk-layer-shell pango gdk-pixbuf2 cairo glib2 gcc-libs glibc
+  sudo pacman -S gtk3 gtk-layer-shell pango gdk-pixbuf2 libdbusmenu-gtk3 cairo glib2 gcc-libs glibc
 
   git clone https://github.com/elkowar/eww.git $HOME/Downloads/eww
   cd $HOME/Downloads/eww
