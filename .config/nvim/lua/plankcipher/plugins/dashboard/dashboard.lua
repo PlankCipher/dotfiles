@@ -52,6 +52,16 @@ function open_dashboard()
     {
       'for he is a friend to none, that is a friend to all',
     },
+    {
+      "I mean, if life's so hard already, why do we bring more trouble down on ourselves?",
+      "What's up with the need to hit the self-destruct button?",
+      "Maybe we like the pain.",
+      "Maybe we're wired that way.",
+      "Because without it, I don't know...",
+      "...maybe we just wouldn't feel real.",
+      'What\'s that saying? "Why do I keep hitting myself with a hammer?"',
+      '"Because it feels so good when I stop."',
+    },
   }
 
   math.randomseed(('' .. os.time()):reverse())
