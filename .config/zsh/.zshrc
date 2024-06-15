@@ -6,8 +6,6 @@ plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-alias clear-history="echo ' ' > $HISTFILE && history -c"
-alias open="xdg-open"
 alias bat="bat -p --theme rose-pine-moon"
 alias gd="git diff --patch --stat"
 alias gdf='git status -s | sed -E "/(^\?\?)|(^M )/d" | awk "{ print \$2 }" | fzf --preview "bat -p --color always -l diff <(git diff --patch --stat {})"'
@@ -60,9 +58,14 @@ _full_upgrade () {
 
 alias full_upgrade="_full_upgrade pacman yay yarn composer rust eww"
 
+function clear_history {
+  echo -n >| "$HISTFILE"
+  fc -p "$HISTFILE"
+}
+
 # Clear history on start and exit
-clear-history 2> /dev/null
-trap 'clear-history 2> /dev/null' EXIT
+clear_history
+trap 'clear_history' EXIT
 
 # Enable vi mode
 bindkey -v
