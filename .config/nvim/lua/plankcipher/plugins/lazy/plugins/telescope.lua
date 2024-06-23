@@ -20,6 +20,7 @@ return {
     {'<leader>fd', '<cmd>Telescope git_status<cr>'},
     {'z=', '<cmd>Telescope spell_suggest<cr>'},
     {'gd', '<cmd>Telescope lsp_definitions<cr>'},
+    {'gt', '<cmd>Telescope lsp_type_definitions<cr>'},
     {'gr', '<cmd>Telescope lsp_references<cr>'},
     {'gi', '<cmd>Telescope lsp_implementations<cr>'},
     {'gD', vim.lsp.buf.declaration},
