@@ -58,10 +58,7 @@ _full_upgrade () {
 
 alias full_upgrade="_full_upgrade pacman yay yarn composer rust eww"
 
-function clear_history {
-  echo -n >| "$HISTFILE"
-  fc -p "$HISTFILE"
-}
+alias clear_history="echo y | history -c > /dev/null 2>&1"
 
 # Clear history on start and exit
 clear_history
