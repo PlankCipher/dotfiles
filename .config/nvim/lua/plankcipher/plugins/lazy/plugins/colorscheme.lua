@@ -34,6 +34,7 @@ return {
         link = 'iris',
 
         error = 'love',
+        ok = '#8ec07c',
         warn = 'gold',
         info = 'pine',
         hint = 'foam',
