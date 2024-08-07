@@ -20,5 +20,7 @@ export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/nvim/lua/plankcipher/plugins/lazy
 export NODE_REPL_HISTORY=""
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export WINEPREFIX="$XDG_DATA_HOME/wine"
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
+export COREPACK_ENABLE_AUTO_PIN=0
 
 Hyprland

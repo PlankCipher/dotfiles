@@ -75,6 +75,7 @@ EOF
   sudo pacman -S nodejs
 
   sudo corepack enable
+  corepack install -g yarn@1.22.22
 
   yarn config set init-license GPL-3.0-only -g
   yarn config set init-author-name PlankCipher -g
