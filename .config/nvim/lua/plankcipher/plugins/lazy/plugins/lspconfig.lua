@@ -18,10 +18,12 @@ return {
     end
 
     function code_action_listener()
-      local params = vim.lsp.util.make_range_params()
+      local current_row, _ = unpack(vim.api.nvim_win_get_cursor(0))
 
-      local context = { diagnostics = vim.lsp.diagnostic.get_line_diagnostics() }
-      params.context = context
+      local params = vim.lsp.util.make_range_params()
+      params.context = {
+        diagnostics = vim.diagnostic.get(0, { lnum = current_row }),
+      }
 
       vim.lsp.buf_request(0, 'textDocument/codeAction', params, function(err, result, ctx, config)
         vim.fn.sign_unplace('LspSigns', {buffer = vim.api.nvim_buf_get_name(0)})
@@ -30,8 +32,7 @@ return {
           return
         end
 
-        local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
-        vim.fn.sign_place(0, 'LspSigns', 'LspCodeAction', vim.api.nvim_buf_get_name(0), {lnum = row})
+        vim.fn.sign_place(0, 'LspSigns', 'LspCodeAction', vim.api.nvim_buf_get_name(0), { lnum = current_row })
       end)
     end
 
@@ -169,8 +170,8 @@ return {
     local opts = {noremap=true, silent=true}
 
     vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+    vim.keymap.set('n', '[d', function() vim.diagnostic.jump({count=-1, float=true}) end, opts)
+    vim.keymap.set('n', ']d', function() vim.diagnostic.jump({count=1, float=true}) end, opts)
     vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, opts)
