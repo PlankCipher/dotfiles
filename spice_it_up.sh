@@ -258,7 +258,7 @@ EOF
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
   # Install colorscripts
-  yay -S shell-color-scripts
+  yay -S shell-color-scripts-git
   xargs -a $SCRIPT_DIR/zsh/blacklisted_colorscripts.txt -I {} sh -c 'colorscript --blacklist {}'
 }
 
