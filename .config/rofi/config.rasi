@@ -78,7 +78,7 @@ inputbar {
   margin: 0 0 20px 0;
   padding: 45px 95px;
   border-radius: 12px 12px 0 0;
-  background-image: url("~/.config/wallpapers/10.png", width);
+  background-image: url("~/.config/wallpapers/11.jpg", width);
   children: [prompt, textbox-prompt-sep, entry, textbox-case-sep-left, case-indicator, textbox-case-sep-right, num-filtered-rows, textbox-nums-sep, num-rows];
 }
 
