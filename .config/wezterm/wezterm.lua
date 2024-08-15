@@ -119,9 +119,17 @@ config.warn_about_missing_glyphs = false
 
 config.line_height = 0.9
 config.font_size = 14
-config.font = wezterm.font_with_fallback({
-  'LigaBerkeleyMono Nerd Font',
-})
+config.font = wezterm.font('RecMonoCasual Nerd Font')
+
+config.font_rules = {
+  {
+    italic = true,
+    font = wezterm.font({
+      family = 'RecMonoCasual Nerd Font Mono',
+      italic = true,
+    }),
+  },
+}
 
 config.keys = {
   {
