@@ -13,31 +13,31 @@ return {
     local cmp = require('cmp')
 
     local kind_icons = {
-      Text = '󰉿 TXT',
-      Method = ' MTD',
-      Function = '󰊕 FUN',
-      Constructor = ' CON',
-      Field = '󰜢 FLD',
-      Variable = '󰀫 VAR',
-      Class = '󰠱 CLS',
-      Interface = ' IFC',
-      Module = ' MOD',
-      Property = '󰜢 PRP',
-      Unit = '󰑭 UNT',
-      Value = '󰎠 VAL',
-      Enum = ' ENM',
-      Keyword = '󰌋 KWD',
-      Snippet = ' SNP',
-      Color = '󰉦 CLR',
-      File = '󰈙 FIL',
-      Reference = ' REF',
-      Folder = ' FDR',
-      EnumMember = ' EMR',
-      Constant = '󰏿 CNS',
-      Struct = '󰙅 STR',
-      Event = ' EVN',
-      Operator = '󱓉 OPR',
-      TypeParameter = ' TYP',
+      Text = ' 󰉿 ',
+      Method = '  ',
+      Function = ' 󰊕 ',
+      Constructor = '  ',
+      Field = ' 󰜢 ',
+      Variable = ' 󰀫 ',
+      Class = ' 󰠱 ',
+      Interface = '  ',
+      Module = '  ',
+      Property = ' 󰜢 ',
+      Unit = ' 󰑭 ',
+      Value = ' 󰎠 ',
+      Enum = '  ',
+      Keyword = ' 󰌋 ',
+      Snippet = '  ',
+      Color = ' 󰉦 ',
+      File = ' 󰈙 ',
+      Reference = '  ',
+      Folder = '  ',
+      EnumMember = '  ',
+      Constant = ' 󰏿 ',
+      Struct = ' 󰙅 ',
+      Event = '  ',
+      Operator = ' 󱓉 ',
+      TypeParameter = '  ',
     }
 
     local orig_get_selected_entry = cmp.core.view.get_selected_entry
@@ -88,12 +88,12 @@ return {
         fields = {'kind', 'abbr', 'menu'},
         format = function(entry, vim_item)
           vim_item.kind = kind_icons[vim_item.kind]
-          vim_item.abbr = string.format('│ %s', vim_item.abbr:gsub('^%s+', ''))
-          vim_item.menu = string.format('│ %s', ({
-            path = '󰈙 PTH',
-            buffer = ' BUF',
-            nvim_lsp = '󰒓 LSP',
-            luasnip = '󰅴 SNP',
+          vim_item.abbr = string.format('%s', vim_item.abbr:gsub('^%s+', ''))
+          vim_item.menu = string.format(' %s ', ({
+            path = '󰈙',
+            buffer = '',
+            nvim_lsp = '󰒓',
+            luasnip = '󰅴',
           })[entry.source.name])
 
           return vim_item
@@ -102,8 +102,9 @@ return {
       window = {
         completion = {
           border = 'rounded',
-          col_offset = -9,
           winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+          col_offset = -5,
+          side_padding = 1,
         },
         documentation = {
           border = 'rounded',
