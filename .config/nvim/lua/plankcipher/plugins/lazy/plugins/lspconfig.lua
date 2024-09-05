@@ -94,7 +94,7 @@ return {
       html = base_config,
       cssls = base_config,
       emmet_ls = base_config,
-      tsserver = base_config,
+      ts_ls = base_config,
       clangd = base_config,
       pyright = base_config,
 
