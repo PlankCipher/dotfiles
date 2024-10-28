@@ -26,7 +26,7 @@ function open_dashboard()
       'Just me, my music, and the road...',
     },
     {
-      'Even a broken clock gets tha chance to be right twice a day',
+      'Even a broken clock gets the chance to be right twice a day',
     },
     {
       'Shitty software everywhere',
