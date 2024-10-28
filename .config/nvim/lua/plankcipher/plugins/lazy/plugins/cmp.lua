@@ -81,7 +81,7 @@ return {
       sources = {
         {name = 'path'},
         {name = 'nvim_lsp'},
-        {name = 'buffer'},
+        {name = 'buffer', option = {get_bufnrs = vim.api.nvim_list_bufs}},
         {name = 'luasnip'},
       },
       formatting = {
