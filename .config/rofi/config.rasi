@@ -123,6 +123,7 @@ case-indicator {
   text-color: @foreground;
   background-color: @background;
   vertical-align: 0.5;
+  padding: 12px 0 12px 0;
 }
 
 textbox-case-sep-right {
@@ -150,6 +151,7 @@ textbox-nums-sep {
   text-color: @normal-foreground;
   background-color: @background;
   vertical-align: 0.5;
+  padding: 12px 0 12px 0;
 }
 
 num-rows {
