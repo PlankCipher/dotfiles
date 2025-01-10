@@ -33,6 +33,24 @@ return {
     }
     vim.g.neoformat_enabled_php = {'phpcsfixer'}
 
+    vim.g.neoformat_htmldjango_djlint = {
+      exe = 'djlint',
+      args = {
+        '-',
+        '--reformat',
+        '--indent', '2',
+        '--format-css', '--format-js',
+        '--max-line-length', '80',
+        '--format-attribute-template-tags',
+        '--indent-css', '2',
+        '--indent-js', '2',
+        '--close-void-tags',
+        '--max-blank-lines', '1',
+      },
+      stdin = 1,
+    }
+    vim.g.neoformat_enabled_htmldjango = {'djlint'}
+
     vim.api.nvim_create_augroup('formatting', {
       clear = false
     })
