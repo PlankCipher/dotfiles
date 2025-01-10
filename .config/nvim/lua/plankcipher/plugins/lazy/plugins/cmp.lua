@@ -134,6 +134,12 @@ return {
               show_hidden_files_by_default = true,
             }
           },
+
+          buffer = {
+            opts = {
+              get_bufnrs = vim.api.nvim_list_bufs,
+            }
+          },
         },
       },
 
