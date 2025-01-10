@@ -121,9 +121,11 @@ return {
           '--column',
           '--hidden',
           '--smart-case',
-          '--glob', '!node_modules',
           '--glob', '!.git',
           '--glob', '!LICENSE',
+          '--glob', '!node_modules',
+          '--glob', '!.venv',
+          '--glob', '!__pycache__',
         },
         mappings = {
           i = {
@@ -156,7 +158,15 @@ return {
       },
       pickers = {
         find_files = {
-          find_command = {'rg', '--files', '--hidden', '--glob', '!node_modules', '--glob', '!.git'},
+          find_command = {
+            'rg',
+            '--files',
+            '--hidden',
+            '--glob', '!.git',
+            '--glob', '!node_modules',
+            '--glob', '!.venv',
+            '--glob', '!__pycache__',
+          },
           mappings = multi_selection_i_mappings,
           prompt_title = '󰈙 Find Files',
         },
