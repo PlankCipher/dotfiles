@@ -92,6 +92,7 @@ return {
 
     telescope.setup({
       defaults = {
+        history = false,
         layout_config = {
           horizontal = {
             width = 0.94,
