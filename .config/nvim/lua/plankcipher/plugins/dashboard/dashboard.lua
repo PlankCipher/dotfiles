@@ -22,7 +22,7 @@ function open_dashboard()
   local messages = {
     {
       'Sometimes all I wanna do is head west on 20',
-      "in a car I can't afford, with a plan I don't have.",
+      "in a car I can't afford with a plan I don't have.",
       'Just me, my music, and the road...',
     },
     {
@@ -32,7 +32,7 @@ function open_dashboard()
       'Shitty software everywhere',
     },
     {
-      "(( ) => {...})();",
+      '(( ) => {...})();',
     },
     {
       'Do not go gentle into that good night',
@@ -47,7 +47,7 @@ function open_dashboard()
       'What the faculty have you done lately?',
     },
     {
-      'Kiss me, I love it.',
+      'Kiss me. I love it.',
     },
     {
       'for he is a friend to none, that is a friend to all',
@@ -61,6 +61,11 @@ function open_dashboard()
       "...maybe we just wouldn't feel real.",
       'What\'s that saying? "Why do I keep hitting myself with a hammer?"',
       '"Because it feels so good when I stop."',
+    },
+    {
+      '... professionals who prescribe drugs they know little about',
+      'to cure diseases they know less about',
+      'for people they know nothing about.',
     },
   }
 
