@@ -20,7 +20,7 @@ return {
     function code_action_listener()
       local current_row, _ = unpack(vim.api.nvim_win_get_cursor(0))
 
-      local params = vim.lsp.util.make_range_params()
+      local params = vim.lsp.util.make_range_params(0, 'utf-8')
       params.context = {
         diagnostics = vim.diagnostic.get(0, { lnum = current_row }),
       }
