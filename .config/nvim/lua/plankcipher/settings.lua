@@ -34,7 +34,7 @@ vim.opt.updatetime = 100
 vim.opt.wildmode = 'longest,full'
 vim.opt.wildignore:append('*/vendor/*,*/node_modules/*,*/.git/*')
 vim.opt.wildoptions = 'pum'
-vim.opt.pumheight = 20
+vim.opt.pumheight = 15
 vim.opt.completeopt = 'menuone,noinsert,noselect'
 vim.opt.guicursor = 'n-v-ve:block,o-r-cr-sm:hor20,i-ci-c:ver20,a:blinkon600-blinkoff600'
 vim.opt.termguicolors = true

@@ -1,122 +1,173 @@
 return {
-  'hrsh7th/nvim-cmp',
+  'saghen/blink.cmp',
+  build = 'cargo build --release',
   event = 'InsertEnter',
-  dependencies = {
-    'L3MON4D3/LuaSnip',
-    'hrsh7th/cmp-nvim-lsp',
-    'saadparwaiz1/cmp_luasnip',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-  },
   opts = function()
-    local luasnip = require('luasnip')
-    local cmp = require('cmp')
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'BlinkCmpListSelect',
+      callback = function(event)
+        local data = event.data
 
-    local kind_icons = {
-      Text = ' 󰉿 ',
-      Method = '  ',
-      Function = ' 󰊕 ',
-      Constructor = '  ',
-      Field = ' 󰜢 ',
-      Variable = ' 󰀫 ',
-      Class = ' 󰠱 ',
-      Interface = '  ',
-      Module = '  ',
-      Property = ' 󰜢 ',
-      Unit = ' 󰑭 ',
-      Value = ' 󰎠 ',
-      Enum = '  ',
-      Keyword = ' 󰌋 ',
-      Snippet = '  ',
-      Color = ' 󰉦 ',
-      File = ' 󰈙 ',
-      Reference = '  ',
-      Folder = '  ',
-      EnumMember = '  ',
-      Constant = ' 󰏿 ',
-      Struct = ' 󰙅 ',
-      Event = '  ',
-      Operator = ' 󱓉 ',
-      TypeParameter = '  ',
-    }
-
-    local orig_get_selected_entry = cmp.core.view.get_selected_entry
-    cmp.core.view.get_selected_entry = function(self)
-      return orig_get_selected_entry(self) or
-             self:_get_entries_view():get_first_entry()
-    end
+        if data.item == nil then
+          require('blink.cmp.completion.windows.documentation').auto_show_item(data.context, data.items[1])
+        end
+      end,
+    })
 
     return {
-      view = {
-        entries = {name = 'custom', selection_order = 'near_cursor' },
-      },
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
-      mapping = cmp.mapping.preset.insert({
-        ['<C-k>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-j>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-y>'] = cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        }),
-        ['<Tab>'] = cmp.mapping(function(fallback)
-          if luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-      }),
-      sources = {
-        {name = 'path'},
-        {name = 'nvim_lsp'},
-        {name = 'buffer', option = {get_bufnrs = vim.api.nvim_list_bufs}},
-        {name = 'luasnip'},
-      },
-      formatting = {
-        fields = {'kind', 'abbr', 'menu'},
-        format = function(entry, vim_item)
-          vim_item.kind = kind_icons[vim_item.kind]
-          vim_item.abbr = string.format('%s', vim_item.abbr:gsub('^%s+', ''))
-          vim_item.menu = string.format(' %s ', ({
-            path = '󰈙',
-            buffer = '',
-            nvim_lsp = '󰒓',
-            luasnip = '󰅴',
-          })[entry.source.name])
+      keymap = {
+        preset = 'default',
 
-          return vim_item
-        end
-      },
-      window = {
-        completion = {
-          border = 'rounded',
-          winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
-          col_offset = -5,
-          side_padding = 1,
+        ['<C-space>'] = { 'show' },
+
+        ['<C-k>'] = { function(cmp) return cmp.scroll_documentation_up(4) end, 'fallback' },
+        ['<C-j>'] = { function(cmp) return cmp.scroll_documentation_down(4) end, 'fallback' },
+
+        ['<Tab>']   = {
+          function(cmp)
+            if vim.api.nvim_get_mode().mode == 'c' then
+              return cmp.select_and_accept()
+            else
+              return cmp.snippet_forward()
+            end
+          end,
+          'fallback',
         },
-        documentation = {
+        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+      },
+
+      completion = {
+        keyword = { range = 'prefix' },
+        trigger = {
+          prefetch_on_insert = true,
+          show_on_insert_on_trigger_character = false,
+        },
+        list = { selection = { preselect = false, auto_insert = true } },
+        accept = { auto_brackets = { enabled = false } },
+
+        menu = {
+          scrolloff = vim.o.scrolloff,
+          max_height = vim.o.pumheight,
           border = 'rounded',
-          winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+
+          draw = {
+            padding = 0,
+            gap = 1,
+
+            columns = {
+              { 'kind_icon' }, { 'label' }, { 'source_icon' },
+            },
+
+            components = {
+              kind_icon = {
+                text = function(ctx)
+                  return ' ' .. ctx.kind_icon .. ' '
+                end,
+              },
+
+              source_icon = {
+                text = function(ctx)
+                  local source_icons = {
+                    path = '󰈙',
+                    buffer = '',
+                    lsp = '󰒓',
+                    cmdline = '',
+                  }
+
+                  return ' ' .. source_icons[ctx.source_name:lower()] .. ' '
+                end,
+                highlight = 'BlinkCmpSourceIcon',
+              },
+            },
+          }
+        },
+
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 0,
+          update_delay_ms = 0,
+          window = {
+            max_width = 100,
+            max_height = 30,
+            border = 'rounded',
+          },
+        },
+
+        ghost_text = {
+          enabled = true,
+          show_with_selection = false,
+          show_without_selection = true,
+        },
+      },
+
+      signature = {
+        enabled = true,
+        window = {
           max_width = 100,
           max_height = 30,
+          border = 'rounded',
         },
       },
-      experimental = {
-        ghost_text = {hl_group = 'cmp_ghost_text'},
+
+      fuzzy = {
+        use_frecency = false,
+        use_proximity = false,
+        prebuilt_binaries = { download = false },
       },
-      preselect = cmp.PreselectMode.None,
+
+      sources = {
+        min_keyword_length = 0,
+
+        default = { 'path', 'lsp', 'buffer' },
+
+        cmdline = function()
+          if vim.fn.getcmdtype() == ':' then
+            return { 'path', 'cmdline' }
+          else
+            return {}
+          end
+        end,
+
+        providers = {
+          path = {
+            opts = {
+              show_hidden_files_by_default = true,
+            }
+          },
+        },
+      },
+
+      appearance = {
+        nerd_font_variant = 'mono',
+        kind_icons = {
+          Method = '󰊕',
+          Function = '󰊕',
+          Class = '󰠱',
+          Interface = '',
+          Struct = '󰙅',
+          Constructor = '',
+          Field = '󰜢',
+          Property = '󰜢',
+          Enum = '',
+          EnumMember = '',
+          Variable = '󰀫',
+          Constant = '󰏿',
+          Keyword = '󰌋',
+          Operator = '󱓉',
+          Module = '',
+          Text = '󰉿',
+          Unit = '󰑭',
+          Value = '󰎠',
+          Color = '󰉦',
+          File = '󰈙',
+          Folder = '',
+          Snippet = '',
+          Reference = '',
+          Event = '',
+          TypeParameter = '',
+        },
+      },
     }
   end,
+  opts_extend = { 'sources.default' },
 }
