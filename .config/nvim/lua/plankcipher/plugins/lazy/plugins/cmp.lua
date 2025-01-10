@@ -88,7 +88,7 @@ return {
           update_delay_ms = 0,
           window = {
             max_width = 100,
-            max_height = 30,
+            max_height = 20,
             border = 'rounded',
           },
         },
@@ -104,7 +104,7 @@ return {
         enabled = true,
         window = {
           max_width = 100,
-          max_height = 30,
+          max_height = 20,
           border = 'rounded',
         },
       },
