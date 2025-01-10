@@ -70,6 +70,8 @@ return {
         Search = {fg = base, bg = 'gold', inherit = false},
         IncSearch = {fg = base, bg = 'love', inherit = false},
         CurSearch = {fg = base, bg = 'love', inherit = false},
+        HlSearchLens = {link = 'NonText', inherit = false},
+        HlSearchLensNear = {link = 'NonText', inherit = false},
 
         NonText = {fg = 'highlight_high', inherit = false},
         TrailingWhitespace = {fg = '#ffffff', bg = '#ff0000', bold = true, inherit = false},
