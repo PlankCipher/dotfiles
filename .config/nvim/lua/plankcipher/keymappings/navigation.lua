@@ -1,10 +1,10 @@
 vim.keymap.set({'n', 'v'}, 'k', 'gk')
 vim.keymap.set({'n', 'v'}, 'j', 'gj')
 
-vim.keymap.set('n', '<M-j>', 'Vdp`[==')
-vim.keymap.set('n', '<M-k>', 'VdkP`[==')
-vim.keymap.set('v', '<M-j>', 'dp`[V`]=`[V`]')
-vim.keymap.set('v', '<M-k>', 'dkP`[V`]=`[V`]')
+vim.keymap.set('n', '<M-j>', ":m .+1<CR>==")
+vim.keymap.set('n', '<M-k>', ":m .-2<CR>==")
+vim.keymap.set('v', '<M-j>', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', '<M-k>', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
