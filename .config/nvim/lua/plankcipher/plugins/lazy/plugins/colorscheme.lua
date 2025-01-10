@@ -354,7 +354,7 @@ return {
         SpellLocal = {undercurl = true, sp = 'love', inherit = false},
         SpellRare = {undercurl = true, sp = 'love', inherit = false},
 
-        LazyButtonActive = {fg = base, bg = 'text'},
+        LazyButtonActive = {fg = base, bg = 'text', inherit = false},
       }
     })
 
@@ -430,7 +430,7 @@ return {
     vim.api.nvim_create_autocmd('TextYankPost', {
       pattern = '*',
       callback = function(event)
-        vim.highlight.on_yank({higroup = 'Search', timeout = 100})
+        vim.hl.on_yank({higroup = 'Search', timeout = 100})
       end,
     })
   end,
