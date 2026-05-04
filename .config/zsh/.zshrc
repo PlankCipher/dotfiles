@@ -70,7 +70,7 @@ trap 'clear_history' EXIT
 
 # Enable vi mode
 bindkey -v
-export KEYTIMEOUT=1
+export KEYTIMEOUT=50
 
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
@@ -122,5 +122,7 @@ _fix_cursor() {
   echo -ne '\e[5 q'
 }
 precmd_functions+=(_fix_cursor)
+
+bindkey -M viins 'kj' vi-cmd-mode
 
 colorscript --random
