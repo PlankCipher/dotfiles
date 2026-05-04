@@ -99,6 +99,14 @@ $highlight-high: #56526e;
   color: $gold;
 }
 
+.earbuds {
+  background-color: color.mix($rose, $base, 23);
+}
+
+.earbuds__icon {
+  color: $rose;
+}
+
 .volume {
   background-color: color.mix($iris, $base, 23);
 }
@@ -212,6 +220,10 @@ $highlight-high: #56526e;
 
 .pomodoro.blink {
   @include blink-animation('pomodoro', color.mix($love, $base, 23));
+}
+
+.earbuds.blink {
+  @include blink-animation('earbuds', color.mix($rose, $base, 23));
 }
 
 .control_center * {

@@ -22,6 +22,10 @@
 (deflisten workspaces
            :initial '[]'
            "~/.scripts/hyprland_workspaces.sh")
+(defpoll earbuds
+         :interval "180s"
+         :initial "{}"
+         "~/.scripts/earbuds_battery.sh")
 (deflisten volume
            :initial '{}'
            "~/.scripts/volume.sh volume")
@@ -30,10 +34,12 @@
            "~/.scripts/volume.sh mic")
 
 (defwindow bar
-           :monitor 0
+           :monitor "DP-2"
+           ; :monitor "eDP-1"
            :geometry (geometry :x "0px"
                                :y "15px"
-                               :width "1890px"
+                               :width "2500px"
+                               ; :width "1890"
                                :height "35px"
                                :anchor "top center")
            :stacking "bottom"
@@ -101,6 +107,16 @@
     (box :halign "end"
          :spacing 10
          :space-evenly false
+      (eventbox :cursor "pointer"
+                :onclick "bluetoothctl -- connect 5C:DC:49:01:81:E2"
+                :onrightclick "bluetoothctl -- disconnect 5C:DC:49:01:81:E2"
+        (box :class "box earbuds ${earbuds.class}"
+          :spacing 7
+          :space-evenly false
+          (label :class "earbuds__icon"
+            :text "")
+          (label :text {earbuds.battery})))
+
       (eventbox :cursor "pointer"
                 :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
                 :onrightclick "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
@@ -172,7 +188,7 @@
           (label :text "${formattime(EWW_TIME, show-date ? "%a %d-%m-%Y" : "%H:%M")}"))))))
 
 (defwindow control_center
-           :monitor 0
+           :monitor "DP-2"
            :geometry (geometry :x "0px"
                                :y "10px"
                                :width "450px"
