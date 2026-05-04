@@ -1,10 +1,6 @@
 local wezterm = require('wezterm')
 
-local config = {}
-
-if wezterm.config_builder then
-  config = wezterm.config_builder()
-end
+local config = wezterm.config_builder()
 
 config.front_end = 'OpenGL'
 
@@ -41,59 +37,100 @@ config.colors = {
   },
 
   tab_bar = {
-    background = '#2a273f',
+    background = '#1d1b2c',
+
+    active_tab = {
+      bg_color = '#393552',
+      fg_color = '#e0def4',
+      intensity = 'Normal',
+      underline = 'None',
+      italic = false,
+      strikethrough = false,
+    },
+
+    inactive_tab = {
+      bg_color = '#393552',
+      fg_color = '#908caa',
+      intensity = 'Normal',
+      underline = 'None',
+      italic = false,
+      strikethrough = false,
+    },
+
+    inactive_tab_hover = {
+      bg_color = '#393552',
+      fg_color = '#e0def4',
+      intensity = 'Normal',
+      underline = 'None',
+      italic = false,
+      strikethrough = false,
+    },
   },
 }
 
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
-config.tab_bar_at_bottom = true
+config.tab_bar_at_bottom = false
 config.show_new_tab_button_in_tab_bar = false
 config.show_tab_index_in_tab_bar = false
-config.tab_max_width = 30
+config.tab_max_width = math.maxinteger
 
-function basename(s)
-  return string.gsub(s, '/.+/(.+[^/])/?', '%1')
-end
+local HORZ_PADDING = 2
+
+config.window_padding = {
+  top    = '1cell',
+  right  = string.format('%dcell', HORZ_PADDING),
+  bottom = '1cell',
+  left   = string.format('%dcell', HORZ_PADDING),
+}
 
 wezterm.on(
   'format-tab-title',
-  function(tab, tabs, panes, config, hover, max_width)
-    local attribute = {}
-    if tab.is_active or hover then
-      background = '#908caa'
-      foreground = '#1d1b2c'
-      attribute = {Attribute = { Intensity = 'Bold' }}
-    else
-      background = '#44415a'
-      foreground = '#e0def4'
-      attribute = {Attribute = { Intensity = 'Normal' }}
+  function(tab, tabs, _, _, _, _)
+    local MAX_WIDTH = 30
+    local TAB_SPACING_LEN = 3
+
+    local basename = function(s)
+      return string.gsub(s, '/.+/(.+[^/])/?', '%1')
     end
 
-    local proc_name = basename(tab.active_pane.foreground_process_name)
-    local cwd = basename(tab.active_pane.current_working_dir.file_path)
-    local title = ' ' .. proc_name .. '/' .. cwd .. ' '
-    title = wezterm.truncate_right(title, max_width - 1)
+    local tab_title = function(t, max_width)
+      local proc_name = basename(t.active_pane.foreground_process_name)
+      local cwd = basename(t.active_pane.current_working_dir.file_path)
+      local title = string.format(' %s/%s', proc_name, cwd)
+      title = wezterm.truncate_right(title, max_width - 1)
+      title = string.format(' %s ', title)
+      return title
+    end
+
+    local padding = ''
+    if tab.tab_index == 0 then
+      local total_length = 0
+      for _, t in ipairs(tabs) do
+        total_length = total_length + utf8.len(tab_title(t, MAX_WIDTH))
+      end
+      total_length = total_length + ((#tabs - 1) * TAB_SPACING_LEN)
+
+      local padding_len = HORZ_PADDING + math.floor((tab.active_pane.width - total_length) / 2)
+      padding = string.rep(' ', padding_len)
+    end
 
     return {
-      { Background = { Color = background } },
-      { Foreground = { Color = foreground } },
-      attribute,
-      { Text = title },
+      { Background = { Color = '#1d1b2c' } },
+      { Foreground = { Color = '#1d1b2c' } },
+      { Text = padding },
       'ResetAttributes',
-      { Background = { Color = '#2a273f' } },
-      { Foreground = { Color = '#2a273f' } },
-      { Text = ' ' },
+
+      { Text = tab_title(tab, MAX_WIDTH) },
+      'ResetAttributes',
+
+      { Background = { Color = '#1d1b2c' } },
+      { Foreground = { Color = '#1d1b2c' } },
+      { Text = string.rep(' ', TAB_SPACING_LEN) },
+      'ResetAttributes',
     }
   end
 )
-
-config.window_padding = {
-  top = '1cell',
-  right = '2cell',
-  bottom = '1cell',
-  left = '2cell',
-}
 
 config.enable_scroll_bar = false
 config.term = 'wezterm'
@@ -174,7 +211,7 @@ config.keys = {
   },
 }
 
-copy_mode_key_table = wezterm.gui.default_key_tables().copy_mode
+local copy_mode_key_table = wezterm.gui.default_key_tables().copy_mode
 
 table.insert(
   copy_mode_key_table,
