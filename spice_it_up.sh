@@ -80,7 +80,7 @@ EOF
   yarn config set init-license GPL-3.0-only -g
   yarn config set init-author-name PlankCipher -g
 
-  yarn global add eslint-cli create-react-app
+  yarn global add eslint-cli
 }
 
 install_misc_dev_stuff () {
@@ -136,7 +136,7 @@ EOF
 
   yay -S neovim-git
 
-  cp -r $SCRIPT_DIR/.config/nvim $HOME/.config/
+  cp -r $SCRIPT_DIR/.config/nvim $SCRIPT_DIR/.config/clangd $HOME/.config/
 }
 
 install_et () {
@@ -191,7 +191,6 @@ EOF
 
   yay -S ranger
 
-  # Install dragon
   git clone https://github.com/mwh/dragon.git $HOME/Downloads/dragon
   cd $HOME/Downloads/dragon/
   sudo make install
@@ -202,7 +201,6 @@ EOF
 
   cp -r $SCRIPT_DIR/.config/ranger $HOME/.config/
 
-  # Install ranger_devicons plugin
   git clone https://github.com/alexanderjeurissen/ranger_devicons $HOME/.config/ranger/plugins/ranger_devicons
 }
 
@@ -219,7 +217,6 @@ EOF
 
   yay -S mpd mpc
 
-  # Add mpd to required groups
   sudo gpasswd -a mpd $(whoami)
   chmod 710 $HOME/
   sudo gpasswd -a mpd audio
@@ -240,24 +237,19 @@ EOF
 
   yay -S zsh
 
-  # Change default shell to ZSH
   chsh -s /usr/bin/zsh
 
   cp -r $SCRIPT_DIR/.config/zsh $HOME/.config/
   cp $SCRIPT_DIR/zsh/.zprofile $HOME/
 
-  # Install oh-my-zsh
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
 
   cp $SCRIPT_DIR/zsh/steeef.zsh-theme $HOME/.oh-my-zsh/themes/steeef.zsh-theme
 
-  # Install zsh-autosuggestions plugin
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-  # Install zsh-syntax-highlighting plugin
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-  # Install colorscripts
   yay -S shell-color-scripts-git
   xargs -a $SCRIPT_DIR/zsh/blacklisted_colorscripts.txt -I {} sh -c 'colorscript --blacklist {}'
 }
@@ -367,7 +359,7 @@ EOF
 
   yay -S pavucontrol mpv zathura zathura-pdf-mupdf brave-bin zip unzip bat freetube-bin imagemagick dell-g5se-fanctl iw imv
 
-  cp -r $SCRIPT_DIR/.config/bat $SCRIPT_DIR/.config/zathura $HOME/.config/
+  cp -r $SCRIPT_DIR/.config/bat $SCRIPT_DIR/.config/zathura $SCRIPT_DIR/.config/mpv $SCRIPT_DIR/.config/brave-flags.conf $HOME/.config/
   bat cache --build
 
   sudo pacman -S thunderbird
