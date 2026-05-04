@@ -265,7 +265,7 @@ install_rofi () {
 
 EOF
 
-  yay -S rofi-lbonn-wayland-git
+  sudo pacman -S rofi
   cp -r $SCRIPT_DIR/.config/rofi $HOME/.config/
 }
 
