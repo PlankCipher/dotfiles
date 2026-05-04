@@ -1,41 +1,40 @@
--- Automatically open/close quickfix window
--- based on errors output from `:make` command
-vim.api.nvim_create_autocmd('QuickFixCmdPost', {
-  pattern = 'make',
-  nested = true,
-  command = 'cwindow 20',
-})
+local MAKEPRG_NOT_SET = [[for _ in {0..4}; do echo YOU DIDN\'t SET MAKEPRG; done && exit 1]]
+vim.o.makeprg = MAKEPRG_NOT_SET
 
--- Make (compile) and navigate errors/warnings
-vim.keymap.set('n', '<leader>,',  function()
-  vim.opt.makeprg = vim.fn.input('makeprg: ')
+vim.keymap.set('n', '<leader>,', function()
+    local makeprg = vim.fn.input('makeprg: ')
+    vim.o.makeprg = (makeprg ~= '') and makeprg or MAKEPRG_NOT_SET
 end)
-vim.keymap.set('n', '<leader>,,', ':make<CR>')
-vim.keymap.set('n', '<leader>,p', ':cp<CR>')
-vim.keymap.set('n', '<leader>,n', ':cn<CR>')
+vim.keymap.set('n', '<leader>,,', '<Cmd>make<CR>')
 
--- Run
-local runprg_not_set = 'echo "YOU DIDN\'T SET RUNPRG" && exit 1'
-local runprg = runprg_not_set
+local RUNPRG_NOT_SET = [[for _ in {0..4}; do echo YOU DIDN\'t SET RUNPRG; done && exit 1]]
+local runprg = RUNPRG_NOT_SET
 
 vim.keymap.set('n', '<leader>.', function()
-  runprg = vim.fn.input('runprg: ')
-  runprg = (runprg ~= '') and runprg or runprg_not_set
+    runprg = vim.fn.input('runprg: ')
+    runprg = (runprg ~= '') and runprg or RUNPRG_NOT_SET
 end)
 
 local run_in_terminal = function()
-  vim.g.close_on_0_status = false
-  vim.api.nvim_cmd({cmd = 'te', args = {runprg}}, {})
+    vim.g.pc_close_on_0_status = false
+    vim.cmd.terminal({ runprg })
 end
 
-vim.keymap.set('n', '<leader>..', function() run_in_terminal() end)
+vim.keymap.set('n', '<leader>..', run_in_terminal)
 
--- Make and Run
 vim.keymap.set('n', '<leader>,.', function()
-  vim.api.nvim_cmd({cmd = 'make'}, {})
+    vim.cmd.make()
 
-  -- Only run if there were no errors making
-  if vim.v.shell_error == 0 and #vim.fn.getqflist() == 0 then
-    run_in_terminal()
-  end
+    if vim.v.shell_error == 0 and #vim.fn.getqflist() == 0 then
+        run_in_terminal()
+    end
 end)
+
+vim.keymap.set('n', '<leader>,p', '<Cmd>cp<CR>')
+vim.keymap.set('n', '<leader>,n', '<Cmd>cn<CR>')
+
+vim.api.nvim_create_autocmd('QuickFixCmdPost', {
+    group = vim.api.nvim_create_augroup('PCMakeAndRun', { clear = true }),
+    pattern = 'make',
+    command = 'cwindow 25',
+})

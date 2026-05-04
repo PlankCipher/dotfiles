@@ -120,10 +120,10 @@ install_neovim () {
 EOF
 
   yay -S fzf ripgrep the_silver_searcher fd
-  sudo pacman -S aspell aspell-en
+  sudo pacman -S aspell aspell-en tree-sitter-cli deno
 
   yarn global add vscode-langservers-extracted typescript typescript-language-server emmet-ls prettier @fsouza/prettierd pyright
-  sudo pacman -S yapf rustup
+  sudo pacman -S yapf clang rustup
   rustup toolchain install stable nightly
   rustup default stable
   rustup component add rust-src
