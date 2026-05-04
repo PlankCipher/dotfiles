@@ -1,7 +1,7 @@
 #!/bin/sh
 
-CPU_FAN=$(echo "scale=1; $(sensors | grep 'Processor Fan' | awk '{ print $3 }') / 1000" | bc)
-GPU_FAN=$(echo "scale=1; $(sensors | grep 'Video Fan' | awk '{ print $3 }') / 1000" | bc)
+CPU_FAN=$(echo "scale=1; $(sensors | grep -m 1 'Processor Fan' | awk '{ print $3 }') / 1000" | bc)
+GPU_FAN=$(echo "scale=1; $(sensors | grep -m 1 'Video Fan' | awk '{ print $3 }') / 1000" | bc)
 BOOSTED=false
 
 # Gameshift mode (fans at BOOST speed)
