@@ -282,10 +282,7 @@ EOF
   sudo pacman -S pipewire pipewire-pulse wireplumber grim slurp
   systemctl --user enable pipewire pipewire-pulse wireplumber
 
-  yay -S hyprland-git xdg-desktop-portal-hyprland-git hyprland-qt-support-git swaylock-effects swaybg wl-clipboard brightnessctl lxsession-gtk3 xf86-video-amdgpu dunst libnotify qt5-wayland qt6-wayland gnome-themes-extra bibata-cursor-theme swayidle
-
-  hyprpm add https://github.com/hyprwm/hyprland-plugins
-  hyprpm enable hyprbars
+  yay -S hyprland-git xdg-desktop-portal-hyprland-git hyprland-qt-support-git swaylock-effects swaybg wl-clipboard brightnessctl lxsession xf86-video-amdgpu dunst libnotify qt5-wayland qt6-wayland gnome-themes-extra bibata-cursor-theme swayidle
 
   cp -r $SCRIPT_DIR/.config/hypr $SCRIPT_DIR/.config/wallpapers $SCRIPT_DIR/.config/dunst $SCRIPT_DIR/.config/electron-flags.conf $HOME/.config/
 
