@@ -1,5 +1,5 @@
 set selection-clipboard "clipboard"
-set recolor "true"
+set recolor "false"
 set recolor-keephue "false"
 set render-loading "true"
 set page-padding 5
