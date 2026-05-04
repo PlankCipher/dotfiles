@@ -117,15 +117,15 @@ config.allow_square_glyphs_to_overflow_width = 'Always'
 config.bold_brightens_ansi_colors = 'No'
 config.warn_about_missing_glyphs = false
 
-config.line_height = 0.9
+config.line_height = 1.0
 config.font_size = 14
-config.font = wezterm.font('RecMonoCasual Nerd Font')
+config.font = wezterm.font('CaskaydiaMono Nerd Font')
 
 config.font_rules = {
   {
     italic = true,
     font = wezterm.font({
-      family = 'RecMonoCasual Nerd Font Mono',
+      family = 'CaskaydiaMono Nerd Font Mono',
       italic = true,
     }),
   },
