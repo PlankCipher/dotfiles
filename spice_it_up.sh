@@ -101,8 +101,10 @@ EOF
   yay -S insomnia-bin
 
   sudo pacman -S php composer
-  yay -S phpactor
   composer global require friendsofphp/php-cs-fixer
+
+  echo 'extension=iconv' | sudo tee /etc/php/conf.d/extensions.ini
+  yay -S phpactor
 }
 
 install_neovim () {
