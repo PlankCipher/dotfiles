@@ -9,7 +9,7 @@ get_workspaces () {
     WORKSPACES="["
 
     for WORKSPACE in $(hyprctl workspaces | grep -i 'workspace id' | cut -d ' ' -f 3 | sort -n); do
-      if [[ $WORKSPACE -gt 0 ]]; then
+      if [[ $WORKSPACE -gt 0 ]] && [[ $WORKSPACE -lt 10 ]]; then
         CLASS=$([[ $WORKSPACE == $ACTIVE_WORKSPACE ]] && echo 'workspace--active' || echo '')
 
         WORKSPACES+=$(printf '{"id":"%s","class":"%s","icon":"%s"},' "$WORKSPACE" "$CLASS" "${ICONS[$WORKSPACE - 1]}")

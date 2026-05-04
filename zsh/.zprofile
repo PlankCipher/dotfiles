@@ -24,4 +24,4 @@ export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
 export COREPACK_ENABLE_AUTO_PIN=0
 export TURBO_TELEMETRY_DISABLED=1
 
-Hyprland
+start-hyprland

@@ -91,7 +91,7 @@
          :space-evenly false
       (for workspace in workspaces
         (eventbox :cursor "pointer"
-                  :onclick "hyprctl dispatch workspace ${workspace.id} > /dev/null"
+                  :onclick "hyprctl dispatch 'hl.dsp.focus({ workspace = ${workspace.id} })' > /dev/null"
                   :class "workspace ${workspace.class}"
                   :width 32
                   :height 32

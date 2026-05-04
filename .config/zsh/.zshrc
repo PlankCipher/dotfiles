@@ -23,6 +23,10 @@ _full_upgrade () {
         yay -Syu --devel
         ;;
 
+      "hyprpm")
+        hyprpm update
+        ;;
+
       "yarn")
         yarn global upgrade
         ;;
@@ -56,7 +60,7 @@ _full_upgrade () {
   done
 }
 
-alias full_upgrade="_full_upgrade pacman yay yarn composer rust eww"
+alias full_upgrade="_full_upgrade pacman yay hyprpm yarn composer rust eww"
 
 alias clear_history="echo y | history -c > /dev/null 2>&1"
 
