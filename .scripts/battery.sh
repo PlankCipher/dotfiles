@@ -8,14 +8,8 @@ CLASS=""
 
 if [[ "$STATUS" == "Full" ]]; then
   ICON=""
-  CLASS="blink"
 elif [[ "$STATUS" == "Charging" ]]; then
   ICON=""
-
-  if [[ $CAPACITY -ge 97 ]]; then
-    CLASS="blink"
-    notify-send -a 'Battery' 'Battery almost full'
-  fi
 else
   if [[ $CAPACITY -ge 80 ]]; then
     ICON=""
